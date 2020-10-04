@@ -118,3 +118,4 @@ C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcor
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\OnlineAuction.pdb
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\OnlineAuction.genruntimeconfig.cache
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
