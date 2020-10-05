@@ -10,6 +10,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
           <e p="AccountController.cs" t="Include" />
+          <e p="AdminController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -35,6 +36,8 @@
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="ViewModels" t="Include">
+          <e p="CreateUserViewModel.cs" t="Include" />
+          <e p="EditUserViewModel.cs" t="Include" />
           <e p="LoginViewModel.cs" t="Include" />
           <e p="RegisterViewModel.cs" t="Include" />
         </e>
@@ -44,6 +47,13 @@
           <e p="Account" t="Include">
             <e p="Login.cshtml" t="Include" />
             <e p="Register.cshtml" t="Include" />
+          </e>
+          <e p="Admin" t="Include">
+            <e p="CreateUser.cshtml" t="Include" />
+            <e p="EditUser.cshtml" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="Index.cshtml.cs" t="Include" />
+            <e p="Users.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">
             <e p="Index.cshtml" t="Include" />
