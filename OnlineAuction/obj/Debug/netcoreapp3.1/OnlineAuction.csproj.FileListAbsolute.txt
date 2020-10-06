@@ -123,3 +123,4 @@ C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcor
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditUser.cshtml.g.cs
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Users.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ChangeUserPassword.cshtml.g.cs

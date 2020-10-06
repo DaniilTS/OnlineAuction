@@ -31,7 +31,7 @@ namespace OnlineAuction.Controllers
                 var user = new User
                 {
                     Email = model.Email,
-                    UserName = model.Name,
+                    UserName = model.UserName,
                     Year = model.Year
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -62,7 +62,7 @@ namespace OnlineAuction.Controllers
             if (ModelState.IsValid)
             {
                 var result = 
-                    await _signInManager.PasswordSignInAsync(model.Name, model.Password, model.RememberMe, false);
+                    await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
@@ -89,5 +89,7 @@ namespace OnlineAuction.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        
     }
 }

@@ -6,7 +6,7 @@ namespace OnlineAuction.ViewModels
     {
         [Required]
         [Display(Name = "Имя")]
-        public string Name { get; set; }
+        public string UserName { get; set; }
          
         [Required]
         [DataType(DataType.Password)]

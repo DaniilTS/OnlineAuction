@@ -34,7 +34,7 @@ namespace OnlineAuction.Controllers
                 User user = new User
                 {
                     Email = model.Email, 
-                    UserName = model.Name, 
+                    UserName = model.UserName, 
                     Year = model.Year
                 };
 
@@ -44,12 +44,10 @@ namespace OnlineAuction.Controllers
                 {
                     return RedirectToAction("Users");
                 }
-                else
+
+                foreach (var error in result.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
@@ -68,6 +66,7 @@ namespace OnlineAuction.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
+                UserName = user.UserName,
                 Year = user.Year
             };
             return View(model);
@@ -82,7 +81,7 @@ namespace OnlineAuction.Controllers
                 if (user != null)
                 {
                     user.Email = model.Email;
-                    user.UserName = model.Name;
+                    user.UserName = model.UserName;
                     user.Year = model.Year;
 
                     var result = await _userManager.UpdateAsync(user);
@@ -105,6 +104,52 @@ namespace OnlineAuction.Controllers
             }
 
             return RedirectToAction("Users");
+        }
+        
+        public async Task<IActionResult> ChangeUserPassword(string id)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            ChangePasswordViewModel model = new ChangePasswordViewModel
+            {
+                Id=user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeUserPassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByIdAsync(model.Id);
+                if (user != null)
+                {
+                    IdentityResult result = 
+                        await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if(result.Succeeded)
+                    {
+                        return RedirectToAction("Users");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                }
+            }
+            return View(model);
         }
     }
 }
