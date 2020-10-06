@@ -124,3 +124,14 @@ C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcor
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Users.cshtml.g.cs
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ChangeUserPassword.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.AspNetCore.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Extensions.Hosting.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Extensions.Logging.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Formatting.Compact.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Settings.Configuration.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll

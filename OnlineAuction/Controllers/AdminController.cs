@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using OnlineAuction.ViewModels;
 
 namespace OnlineAuction.Controllers
 {
+    
     public class AdminController : Controller
     {
         private UserManager<User> _userManager;

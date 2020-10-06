@@ -1,0 +1,49 @@
+2020-10-06 19:06:12.945 +03:00 [INF] User profile is available. Using 'C:\Users\Stanislav\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-10-06 19:06:13.324 +03:00 [INF] Now listening on: https://localhost:5001
+2020-10-06 19:06:13.324 +03:00 [INF] Now listening on: http://localhost:5000
+2020-10-06 19:06:13.325 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-10-06 19:06:13.325 +03:00 [INF] Hosting environment: Development
+2020-10-06 19:06:13.325 +03:00 [INF] Content root path: C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction
+2020-10-06 19:06:13.930 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/  
+2020-10-06 19:06:15.135 +03:00 [WRN] No type was specified for the decimal property 'StartCurrency' on entity type 'Lot'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()', specify precision and scale using 'HasPrecision()' or configure a value converter using 'HasConversion()'.
+2020-10-06 19:06:15.303 +03:00 [INF] Entity Framework Core 5.0.0-rc.1.20451.13 initialized 'ApplicationContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2020-10-06 19:06:16.997 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2020-10-06 19:06:17.077 +03:00 [INF] Executed DbCommand (64ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2020-10-06 19:06:17.094 +03:00 [INF] Executing endpoint 'OnlineAuction.Controllers.HomeController.Index (OnlineAuction)'
+2020-10-06 19:06:17.131 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller OnlineAuction.Controllers.HomeController (OnlineAuction).
+2020-10-06 19:06:17.161 +03:00 [INF] Executing ViewResult, running view Index.
+2020-10-06 19:06:17.309 +03:00 [INF] Executed ViewResult - view Index executed in 149.9343ms.
+2020-10-06 19:06:17.312 +03:00 [INF] Executed action OnlineAuction.Controllers.HomeController.Index (OnlineAuction) in 180.399ms
+2020-10-06 19:06:17.313 +03:00 [INF] Executed endpoint 'OnlineAuction.Controllers.HomeController.Index (OnlineAuction)'
+2020-10-06 19:06:17.332 +03:00 [INF] Request finished in 3407.5409ms 200 text/html; charset=utf-8
+2020-10-06 19:06:17.375 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/lib/bootstrap/dist/css/bootstrap.min.css  
+2020-10-06 19:06:17.375 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/lib/jquery/dist/jquery.min.js  
+2020-10-06 19:06:17.375 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/css/site.css  
+2020-10-06 19:06:17.375 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/lib/bootstrap/dist/js/bootstrap.bundle.min.js  
+2020-10-06 19:06:17.376 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/js/site.js?v=8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U  
+2020-10-06 19:06:17.401 +03:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\wwwroot\css\site.css'
+2020-10-06 19:06:17.401 +03:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\wwwroot\js\site.js'
+2020-10-06 19:06:17.402 +03:00 [INF] Request finished in 26.5188ms 200 application/javascript
+2020-10-06 19:06:17.404 +03:00 [INF] Request finished in 26.8475ms 200 text/css
+2020-10-06 19:06:17.420 +03:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\wwwroot\lib\jquery\dist\jquery.min.js'
+2020-10-06 19:06:17.420 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js'
+2020-10-06 19:06:17.420 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2020-10-06 19:06:17.423 +03:00 [INF] Request finished in 48.2253ms 200 application/javascript
+2020-10-06 19:06:17.423 +03:00 [INF] Request finished in 48.4677ms 200 application/javascript
+2020-10-06 19:06:17.423 +03:00 [INF] Request finished in 48.7458ms 200 text/css
