@@ -11,9 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Builder;
 using OnlineAuction.Models;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace OnlineAuction
 {
@@ -31,7 +31,11 @@ namespace OnlineAuction
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(opts =>
+                {
+                    opts.User.RequireUniqueEmail = true;
+                })
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -62,6 +66,8 @@ namespace OnlineAuction
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseSerilogRequestLogging();
 
             app.UseAuthorization();
             app.UseAuthentication();

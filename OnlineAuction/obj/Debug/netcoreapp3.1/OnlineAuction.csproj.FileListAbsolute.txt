@@ -135,3 +135,14 @@ C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcor
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Settings.Configuration.dll
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Sinks.Debug.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreateRole.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditRole.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Roles.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Enrichers.Environment.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Enrichers.Process.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Enrichers.Thread.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Filters.Expressions.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Superpower.dll

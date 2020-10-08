@@ -1,19 +1,13 @@
 ﻿@page
 @model OnlineAuction.Views.Admin.Index
 
-@{
-    Layout = null;
-}
+<h2>Admin Panel</h2>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
-</div>
-</body>
-</html>
+<table class="table">
+    <tr>
+        <td><a class="btn btn-sm btn-primary" asp-action="Users">Список пользователей</a></td>
+    </tr>
+    <tr>
+            <td><a class="btn btn-sm btn-primary" asp-action="Roles">Список ролей</a></td>
+    </tr>
+</table>

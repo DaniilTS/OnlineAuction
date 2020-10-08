@@ -13,9 +13,15 @@
           <e p="AdminController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
+        <e p="EmailService.cs" t="Include" />
+        <e p="Helper" t="Include">
+          <e p="RoleInitializer.cs" t="Include" />
+        </e>
         <e p="Logs" t="Include">
-          <e p="all-logs.txt" t="Include" />
-          <e p="error-logs.txt" t="Include" />
+          <e p="cp_20201008.log" t="Include" />
+          <e p="ex_20201008.log" t="Include" />
+          <e p="log-all.txt" t="Include" />
+          <e p="log-error.txt" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="ApplicationContext.cs" t="Include" />
@@ -41,6 +47,7 @@
         <e p="Startup.cs" t="Include" />
         <e p="ViewModels" t="Include">
           <e p="ChangePasswordViewModel.cs" t="Include" />
+          <e p="ChangeRoleViewModel.cs" t="Include" />
           <e p="CreateUserViewModel.cs" t="Include" />
           <e p="EditUserViewModel.cs" t="Include" />
           <e p="LoginViewModel.cs" t="Include" />
@@ -55,10 +62,13 @@
           </e>
           <e p="Admin" t="Include">
             <e p="ChangeUserPassword.cshtml" t="Include" />
+            <e p="CreateRole.cshtml" t="Include" />
             <e p="CreateUser.cshtml" t="Include" />
+            <e p="EditRole.cshtml" t="Include" />
             <e p="EditUser.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
             <e p="Index.cshtml.cs" t="Include" />
+            <e p="Roles.cshtml" t="Include" />
             <e p="Users.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">
