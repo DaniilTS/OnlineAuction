@@ -25,7 +25,8 @@ namespace OnlineAuction.Helper
                 User admin = new User
                 {
                     UserName = adminName,
-                    Email = adminEmail
+                    Email = adminEmail,
+                    EmailConfirmed = true
                 };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)

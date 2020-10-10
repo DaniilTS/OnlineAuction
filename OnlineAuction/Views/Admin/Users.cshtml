@@ -6,11 +6,28 @@
 <a asp-action="CreateUser">Добавить пользователя</a>
  
 <table class="table">
-    <tr><th>Email</th><th>UserName</th><th>Год</th><th></th></tr>
+    <tr><th>Email</th><th>Confirmed?</th><th>UserName</th><th>Год</th><th></th></tr>
     @foreach (var user in Model)
     {
         <tr>
             <td>@user.Email</td>
+            <td>
+                @if (user.EmailConfirmed)
+                {
+                    <img class="verified-img" src="/pictures/ok.png"/>
+                }
+                else
+                {
+                    <form asp-action="ConfirmEmail" asp-route-userid="@user.Id" method="post" id="form">
+                        <input class="verified-chekbox" type="checkbox" onclick="send()">
+                    </form>
+                    <script>
+                        function send() {
+                          $('#form').submit();
+                        }
+                    </script>
+                }
+                </td>
             <td>@user.UserName</td>
             <td>@user.Year</td>
             <td>

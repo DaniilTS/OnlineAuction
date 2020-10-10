@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aTb326xiimOkJZ5FE8stAC7DN8nQzGjdqDgFL66GguyOsxdL2DiC30SvygGW1fB0WJNCTAPDU4q7HBX5O56tFQ==",
+  "dgSpecHash": "/XeVnBR6DmFMoqQepLH9fQWIr7StIGRGbz8tAUnTXKUbtVCheoUoQ1uIIfym+eeNjnp/YHHU8o8sko3c6vik7g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Stanislav\\Documents\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj",
   "expectedPackageFiles": [
@@ -72,11 +72,13 @@
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.enrichers.thread\\3.1.0\\serilog.enrichers.thread.3.1.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.extensions.hosting\\3.1.0\\serilog.extensions.hosting.3.1.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.extensions.logging\\3.0.1\\serilog.extensions.logging.3.0.1.nupkg.sha512",
+    "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.filters.expressions\\2.1.0\\serilog.filters.expressions.2.1.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.formatting.compact\\1.1.0\\serilog.formatting.compact.1.1.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.settings.configuration\\3.1.0\\serilog.settings.configuration.3.1.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.sinks.console\\3.1.1\\serilog.sinks.console.3.1.1.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.sinks.debug\\1.0.1\\serilog.sinks.debug.1.0.1.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\serilog.sinks.file\\4.1.0\\serilog.sinks.file.4.1.0.nupkg.sha512",
+    "C:\\Users\\Stanislav\\.nuget\\packages\\superpower\\2.3.0\\superpower.2.3.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

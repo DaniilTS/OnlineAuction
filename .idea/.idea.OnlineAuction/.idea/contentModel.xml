@@ -13,18 +13,19 @@
           <e p="AdminController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
+        <e p="Data" t="Include">
+          <e p="ApplicationContext.cs" t="Include" />
+        </e>
         <e p="EmailService.cs" t="Include" />
         <e p="Helper" t="Include">
           <e p="RoleInitializer.cs" t="Include" />
         </e>
         <e p="Logs" t="Include">
-          <e p="cp_20201008.log" t="Include" />
-          <e p="ex_20201008.log" t="Include" />
-          <e p="log-all.txt" t="Include" />
-          <e p="log-error.txt" t="Include" />
+          <e p="cp_20201010.log" t="Include" />
+          <e p="ex_20201010.log" t="Include" />
+          <e p="ex_20201010.log~" t="Include" />
         </e>
         <e p="Models" t="Include">
-          <e p="ApplicationContext.cs" t="Include" />
           <e p="Category.cs" t="Include" />
           <e p="Comment.cs" t="Include" />
           <e p="ErrorViewModel.cs" t="Include" />
@@ -85,7 +86,6 @@
           <e p="css" t="Include">
             <e p="site.css" t="Include" />
           </e>
-          <e p="favicon.ico" t="Include" />
           <e p="js" t="Include">
             <e p="site.js" t="Include" />
           </e>
@@ -141,6 +141,10 @@
               <e p="jquery.validate.unobtrusive.min.js" t="Include" />
               <e p="LICENSE.txt" t="Include" />
             </e>
+          </e>
+          <e p="pictures" t="Include">
+            <e p="favicon.ico" t="Include" />
+            <e p="ok.png" t="Include" />
           </e>
         </e>
       </e>

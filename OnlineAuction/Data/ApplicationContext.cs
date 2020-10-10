@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OnlineAuction.Models;
 
-namespace OnlineAuction.Models
+namespace OnlineAuction.Data
 {
     public class ApplicationContext: IdentityDbContext<User>
     {

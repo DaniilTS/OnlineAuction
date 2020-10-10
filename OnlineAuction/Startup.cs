@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using OnlineAuction.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using OnlineAuction.Data;
 
 namespace OnlineAuction
 {

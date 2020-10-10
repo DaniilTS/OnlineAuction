@@ -44,6 +44,7 @@ namespace OnlineAuction.Controllers
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
+                await _userManager.AddToRoleAsync(user, "user");
 
                 if (result.Succeeded)
                 {
@@ -111,6 +112,28 @@ namespace OnlineAuction.Controllers
             return RedirectToAction("Users");
         }
         
+        [HttpPost]
+        public async Task<IActionResult> ConfirmEmail(string userId)
+        {
+            if (userId == null)
+            {
+                return View("Error");
+            }
+
+            User user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+                return RedirectToAction("Users");
+            else
+                return View("Error");
+        }
+
         public async Task<IActionResult> ChangeUserPassword(string id)
         {
             User user = await _userManager.FindByIdAsync(id);

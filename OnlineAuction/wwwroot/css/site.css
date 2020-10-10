@@ -69,3 +69,13 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.verified-img{
+  margin: 0 0 0 20px;
+  height: 20px;
+  width: 20px;
+}
+
+.verified-chekbox{
+  margin: 0 0 0 20px;
+}
