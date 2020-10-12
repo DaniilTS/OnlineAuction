@@ -1,25 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OnlineAuction.Data;
 using OnlineAuction.Models;
 using OnlineAuction.ViewModels;
 
 namespace OnlineAuction.Controllers
 {
-    
     public class AdminController : Controller
     {
         private UserManager<User> _userManager;
         RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationContext _context;
         
-        public AdminController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public AdminController(UserManager<User> userManager, 
+                                RoleManager<IdentityRole> roleManager, 
+                                ApplicationContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context;
         }
         // GET
         public IActionResult Index()
@@ -27,8 +32,19 @@ namespace OnlineAuction.Controllers
             return View();
         }
 
-        public IActionResult Users() => View(_userManager.Users.ToList());
-        
+        public async Task<IActionResult> Users(string searchString)
+        {
+            var users = from u in _userManager.Users
+                select u;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(s => s.UserName.Contains(searchString));
+            }
+
+            return View(await users.ToListAsync());
+        }
+
         public IActionResult CreateUser() => View();
 
         [HttpPost]
@@ -143,7 +159,7 @@ namespace OnlineAuction.Controllers
             }
             ChangePasswordViewModel model = new ChangePasswordViewModel
             {
-                Id=user.Id,
+                Id = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
             };
@@ -255,6 +271,80 @@ namespace OnlineAuction.Controllers
             }
 
             return NotFound();
+        }
+
+        public async Task<IActionResult> Categories()
+        {
+            return View(await _context.Categories.ToListAsync());
+        }
+
+        public IActionResult CreateCategory() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(CreateCategoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Category category = new Category
+                {
+                    Name = model.Name
+                };
+
+                await _context.Categories.AddAsync(category);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Categories");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Categories");
+        }
+
+        public async Task<IActionResult> EditCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            
+            EditCategoryViewModel model = new EditCategoryViewModel
+            {
+               Name = category.Name
+            };
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditCategory(EditCategoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var category = await _context.Categories.FindAsync(model.Id);
+                if (category != null)
+                {
+                    category.Name = model.Name;
+                    _context.Categories.Update(category);
+                    await _context.SaveChangesAsync();
+                    
+                    return RedirectToAction("Categories");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Категория не найдена");
+            }
+
+            return View(model);
         }
     }
 }

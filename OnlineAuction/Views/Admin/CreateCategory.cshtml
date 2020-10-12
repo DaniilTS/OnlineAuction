@@ -1,0 +1,15 @@
+﻿@model OnlineAuction.ViewModels.CreateCategoryViewModel
+
+@{
+    ViewBag.Title = "Добавление категории";
+}
+
+<form asp-action="CreateCategory" asp-controller="Admin">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Название категории</label>
+        <input type="text" asp-for="Name" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить" class="btn btn-outline-secondary" />
+    </div>
+</form>

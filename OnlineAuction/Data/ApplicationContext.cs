@@ -6,9 +6,13 @@ namespace OnlineAuction.Data
 {
     public class ApplicationContext: IdentityDbContext<User>
     {
+        public DbSet<Lot> Lots { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
     }

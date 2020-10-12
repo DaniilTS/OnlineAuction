@@ -146,3 +146,6 @@ C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcor
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Enrichers.Thread.dll
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Serilog.Filters.Expressions.dll
 C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Superpower.dll
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Categories.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreateCategory.cshtml.g.cs
+C:\Users\Stanislav\Documents\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditCategory.cshtml.g.cs
