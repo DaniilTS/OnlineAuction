@@ -11,21 +11,16 @@
         <e p="Controllers" t="Include">
           <e p="AccountController.cs" t="Include" />
           <e p="AdminController.cs" t="Include" />
+          <e p="ErrorController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
         <e p="Data" t="Include">
           <e p="ApplicationContext.cs" t="Include" />
         </e>
-        <e p="EmailService.cs" t="Include" />
         <e p="Helper" t="Include">
           <e p="RoleInitializer.cs" t="Include" />
         </e>
-        <e p="Logs" t="Include">
-          <e p="cp_20201011.log" t="Include" />
-          <e p="cp_20201012.log" t="Include" />
-          <e p="ex_20201011.log" t="Include" />
-          <e p="ex_20201012.log" t="Include" />
-        </e>
+        <e p="Logs" t="Include" />
         <e p="Models" t="Include">
           <e p="Category.cs" t="Include" />
           <e p="Comment.cs" t="Include" />
@@ -46,13 +41,19 @@
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
+        <e p="Services" t="Include">
+          <e p="EmailService.cs" t="Include" />
+          <e p="IEmailService.cs" t="Include" />
+        </e>
         <e p="Startup.cs" t="Include" />
         <e p="ViewModels" t="Include">
           <e p="ChangePasswordViewModel.cs" t="Include" />
           <e p="ChangeRoleViewModel.cs" t="Include" />
           <e p="CreateCategoryViewModel.cs" t="Include" />
+          <e p="CreateLotViewModel.cs" t="Include" />
           <e p="CreateUserViewModel.cs" t="Include" />
           <e p="EditCategoryViewModel.cs" t="Include" />
+          <e p="EditLotViewModel.cs" t="Include" />
           <e p="EditUserViewModel.cs" t="Include" />
           <e p="LoginViewModel.cs" t="Include" />
           <e p="RegisterViewModel.cs" t="Include" />
@@ -70,15 +71,19 @@
             <e p="CreateCategory.cshtml" t="Include" />
             <e p="CreateRole.cshtml" t="Include" />
             <e p="CreateUser.cshtml" t="Include" />
-            <e p="EditCategory.cshtml" t="Include" />
             <e p="EditRole.cshtml" t="Include" />
             <e p="EditUser.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
-            <e p="Index.cshtml.cs" t="Include" />
             <e p="Roles.cshtml" t="Include" />
+            <e p="UpdateCategory.cshtml" t="Include" />
             <e p="Users.cshtml" t="Include" />
           </e>
+          <e p="Error" t="Include">
+            <e p="Index.cshtml" t="Include" />
+          </e>
           <e p="Home" t="Include">
+            <e p="CreateLot.cshtml" t="Include" />
+            <e p="EditLot.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
             <e p="Privacy.cshtml" t="Include" />
           </e>

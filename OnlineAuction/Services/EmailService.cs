@@ -1,11 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-using MimeKit;
+﻿using System.Threading.Tasks;
 using MailKit.Net.Smtp;
-using System.Threading.Tasks;
+using MimeKit;
 
-namespace OnlineAuction
+namespace OnlineAuction.Services
 {
-    public class EmailService
+    public class EmailService: IEmailService
     {
         public async Task SendEmailAsync(string email, string subject, string message)
         {

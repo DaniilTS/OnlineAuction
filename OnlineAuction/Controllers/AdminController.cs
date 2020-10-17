@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using OnlineAuction.ViewModels;
 
 namespace OnlineAuction.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private UserManager<User> _userManager;
@@ -26,7 +28,8 @@ namespace OnlineAuction.Controllers
             _roleManager = roleManager;
             _context = context;
         }
-        // GET
+        
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -289,7 +292,7 @@ namespace OnlineAuction.Controllers
                 {
                     Name = model.Name
                 };
-
+                
                 await _context.Categories.AddAsync(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Categories");
@@ -308,7 +311,7 @@ namespace OnlineAuction.Controllers
             return RedirectToAction("Categories");
         }
 
-        public async Task<IActionResult> EditCategory(int id)
+        public async Task<IActionResult> UpdateCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
@@ -325,7 +328,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditCategory(EditCategoryViewModel model)
+        public async Task<IActionResult> UpdateCategory(EditCategoryViewModel model)
         {
             if (ModelState.IsValid)
             {

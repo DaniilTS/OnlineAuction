@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +13,7 @@ using OnlineAuction.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using OnlineAuction.Data;
+using OnlineAuction.Services;
 
 namespace OnlineAuction
 {
@@ -47,11 +46,14 @@ namespace OnlineAuction
                 options.Password.RequireNonAlphanumeric = false;
             });
             
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            
+            services.AddSingleton<IEmailService, EmailService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
+            env.EnvironmentName = "Production";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,19 +61,21 @@ namespace OnlineAuction
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/Error/Index", "?statusCode={0}");
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
             
-            app.UseSerilogRequestLogging();
-
-            app.UseAuthorization();
+            /*app.UseSerilogRequestLogging();*/
+            
             app.UseAuthentication();
+            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

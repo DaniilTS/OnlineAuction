@@ -9,7 +9,7 @@
             <td>@category.Name</td>
             <td>
                 <form asp-action="DeleteCategory" asp-route-id="@category.Id" method="post">
-                    <a class="btn btn-sm btn-primary" asp-action="EditCategory" asp-route-id="@category.Id">Изменить</a>
+                    <a class="btn btn-sm btn-primary" asp-action="UpdateCategory" asp-route-id="@category.Id">Изменить</a>
                     <button type="submit" class="btn btn-sm btn-danger">
                         Удалить
                     </button>

@@ -32,9 +32,14 @@
                                 
                         <li class="nav-item">
                             <form class="nav-link text-dark" method="post" asp-controller="Account" asp-action="Logout">
-                                <input type="submit" value="Выход" />
+                                <button class="">Log out</button>
                             </form>
                         </li>
+                        @*<form  method="post" asp-controller="Account" asp-action="Logout">
+                            <button type="submit" class="dropdown-item">
+                                Logout
+                            </button>
+                        </form>*@
                     }
                     else
                     {

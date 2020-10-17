@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineAuction.ViewModels;
 using OnlineAuction.Models;
 using Microsoft.AspNetCore.Identity;
+using OnlineAuction.Services;
 
 namespace OnlineAuction.Controllers
 {
@@ -11,11 +12,16 @@ namespace OnlineAuction.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IEmailService _emailService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -44,11 +50,11 @@ namespace OnlineAuction.Controllers
                         "Account",
                         new { userId = user.Id, code = code },
                         protocol: HttpContext.Request.Scheme);
-                    EmailService emailService = new EmailService();
-                    await emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
- 
-                    return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+                    
+                    var message = $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>";
+                    await _emailService.SendEmailAsync(model.Email, "Confirm your account", message);
+
+                    return Content("Для завершения регистрации перейдите в электронную почту и перейдите по ссылке, указанной в письме");
                 }
                 foreach (var error in result.Errors)
                 {
@@ -85,14 +91,8 @@ namespace OnlineAuction.Controllers
                     await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    return RedirectToAction("Index", "Home");
+
                 }
                 else
                 {

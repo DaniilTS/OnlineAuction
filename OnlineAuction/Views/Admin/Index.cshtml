@@ -1,13 +1,19 @@
-﻿@page
-@model OnlineAuction.Views.Admin.Index
+﻿
 
-<h2>Admin Panel</h2>
+<h2 style="text-align: center">Admin Panel</h2>
 
+<p style="font-size: 25px">Аккаунты</p>
 <table class="table">
     <tr>
         <td><a class="btn btn-sm btn-primary" asp-action="Users">Список пользователей</a></td>
     </tr>
     <tr>
-            <td><a class="btn btn-sm btn-primary" asp-action="Roles">Список ролей</a></td>
+        <td><a class="btn btn-sm btn-primary" asp-action="Roles">Список ролей</a></td>
+    </tr>
+</table>
+<p style="font-size: 25px">Лоты</p>
+<table class="table">
+    <tr>
+        <td><a class="btn btn-sm btn-primary" asp-action="Categories">Список Категорий</a></td>
     </tr>
 </table>

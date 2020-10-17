@@ -1,8 +1,27 @@
-﻿@{
+﻿@model IEnumerable<OnlineAuction.Models.Lot>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<a asp-action="CreateLot">Создать лот</a>
+<table class="table">
+    <tr><th>Лот</th><th>Создатель лота</th><th>Название категории</th><th>Описание</th><th>Текущая цена(бел. руб.)</th></tr>
+    @foreach (var lot in Model)
+    {
+        <tr>
+            <td>@lot.Name</td>
+            <td>@lot.User.UserName</td>
+            <td>@lot.Category.Name</td>
+            <td>@lot.Description</td>
+            <td>@lot.StartCurrency</td>
+            <td>
+                <form asp-action="DeleteLot" asp-route-id="@lot.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@lot.Id">Изменить</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

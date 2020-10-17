@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Редактирование категории";
 }
-<form asp-action="EditCategory" asp-controller="Admin" method="post">
+<form asp-action="UpdateCategory" asp-controller="Admin" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <input type="hidden" asp-for="Id" />
