@@ -11,6 +11,7 @@
         <e p="Controllers" t="Include">
           <e p="AccountController.cs" t="Include" />
           <e p="AdminController.cs" t="Include" />
+          <e p="ChatController.cs" t="Include" />
           <e p="ErrorController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
@@ -20,6 +21,10 @@
         <e p="Helper" t="Include">
           <e p="RoleInitializer.cs" t="Include" />
         </e>
+        <e p="Hubs" t="Include">
+          <e p="ChatHub.cs" t="Include" />
+        </e>
+        <e p="libman.json" t="Include" />
         <e p="Logs" t="Include" />
         <e p="Models" t="Include">
           <e p="Category.cs" t="Include" />
@@ -78,6 +83,9 @@
             <e p="UpdateCategory.cshtml" t="Include" />
             <e p="Users.cshtml" t="Include" />
           </e>
+          <e p="Chat" t="Include">
+            <e p="Index.cshtml" t="Include" />
+          </e>
           <e p="Error" t="Include">
             <e p="Index.cshtml" t="Include" />
           </e>
@@ -98,7 +106,15 @@
             <e p="site.css" t="Include" />
           </e>
           <e p="js" t="Include">
-            <e p="site.js" t="Include" />
+            <e p="chat.js" t="Include" />
+            <e p="signalr" t="Include">
+              <e p="dist" t="Include">
+                <e p="browser" t="Include">
+                  <e p="signalr.js" t="Include" />
+                  <e p="signalr.min.js" t="Include" />
+                </e>
+              </e>
+            </e>
           </e>
           <e p="lib" t="Include">
             <e p="bootstrap" t="Include">
@@ -151,6 +167,16 @@
               <e p="jquery.validate.unobtrusive.js" t="Include" />
               <e p="jquery.validate.unobtrusive.min.js" t="Include" />
               <e p="LICENSE.txt" t="Include" />
+            </e>
+            <e p="microsoft" t="Include">
+              <e p="signalr" t="Include">
+                <e p="dist" t="Include">
+                  <e p="browser" t="Include">
+                    <e p="signalr.js" t="Include" />
+                    <e p="signalr.min.js" t="Include" />
+                  </e>
+                </e>
+              </e>
             </e>
           </e>
           <e p="pictures" t="Include">

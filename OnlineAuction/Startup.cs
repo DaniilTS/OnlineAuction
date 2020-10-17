@@ -13,7 +13,9 @@ using OnlineAuction.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using OnlineAuction.Data;
+using OnlineAuction.Hubs;
 using OnlineAuction.Services;
+using OnlineAuction.Hubs;
 
 namespace OnlineAuction
 {
@@ -47,7 +49,7 @@ namespace OnlineAuction
             });
             
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            
+            services.AddSignalR();
             services.AddSingleton<IEmailService, EmailService>();
         }
 
@@ -72,17 +74,17 @@ namespace OnlineAuction
             app.UseRouting();
             
             /*app.UseSerilogRequestLogging();*/
-            
             app.UseAuthentication();
             app.UseAuthorization();
-            
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/Chat/Index");
             });
+            
         }
     }
 }
