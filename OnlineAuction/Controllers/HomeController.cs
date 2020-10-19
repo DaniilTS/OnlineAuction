@@ -11,21 +11,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineAuction.Data;
 using OnlineAuction.Models;
+using OnlineAuction.Services;
+using OnlineAuction.Services.Interfaces;
 using OnlineAuction.ViewModels;
 
 namespace OnlineAuction.Controllers
 {
     public class HomeController : Controller
     {
-        private UserManager<User> _userManager;
-        private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<User> _userManager;
         private readonly ApplicationContext _context;
+        private readonly ILotService _lotService;
+        private readonly IDeleteService _deleteService;
 
-        public HomeController(UserManager<User> userManager,ILogger<HomeController> logger, ApplicationContext context)
+        public HomeController(UserManager<User> userManager,
+            ApplicationContext context,
+            ILotService lotService,
+            IDeleteService deleteService)
         {
-            _logger = logger;
             _context = context;
             _userManager = userManager;
+            _lotService = lotService;
+            _deleteService = deleteService;
         }
 
         public async Task<IActionResult> Index()
@@ -84,10 +91,7 @@ namespace OnlineAuction.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteLot(int id)
         {
-            var lot = await _context.Lots.FindAsync(id);
-            _context.Lots.Remove(lot);
-            await _context.SaveChangesAsync();
-            
+            await _deleteService.DeleteLot(id, _context);
             return RedirectToAction("Index");
         }
 
@@ -119,19 +123,7 @@ namespace OnlineAuction.Controllers
         {
             if(ModelState.IsValid && (model.FinishDate > model.PublicationDate))
             {
-                var lot = await _context.Lots.FindAsync(model.Id);
-
-                lot.Name = model.Name;
-                lot.Description = model.Description;
-                lot.StartCurrency = model.StartCurrency;
-                lot.CategoryId = model.CategoryId;
-                lot.Category = await _context.Categories.FindAsync(lot.CategoryId);
-                lot.PublicationDate = model.PublicationDate;
-                lot.FinishDate = model.FinishDate;
-
-                _context.Lots.Update(lot);
-                await _context.SaveChangesAsync();
-                
+                await _lotService.UpdateLotPost(model.Id, model, _context);
                 return RedirectToAction("Index");
             }
             else

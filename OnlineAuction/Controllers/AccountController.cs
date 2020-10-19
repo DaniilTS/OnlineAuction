@@ -5,6 +5,7 @@ using OnlineAuction.ViewModels;
 using OnlineAuction.Models;
 using Microsoft.AspNetCore.Identity;
 using OnlineAuction.Services;
+using OnlineAuction.Services.Interfaces;
 
 namespace OnlineAuction.Controllers
 {
@@ -91,8 +92,14 @@ namespace OnlineAuction.Controllers
                     await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
-
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {

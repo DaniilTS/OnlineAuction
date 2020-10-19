@@ -16,6 +16,8 @@ using OnlineAuction.Data;
 using OnlineAuction.Hubs;
 using OnlineAuction.Services;
 using OnlineAuction.Hubs;
+using OnlineAuction.Services.Defenitions;
+using OnlineAuction.Services.Interfaces;
 
 namespace OnlineAuction
 {
@@ -49,13 +51,19 @@ namespace OnlineAuction
             });
             
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            
             services.AddSignalR();
+
+            services.AddTransient<IDeleteService, DeleteService>();
+            services.AddScoped<ILotService, LotService>();
             services.AddSingleton<IEmailService, EmailService>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, 
+            IWebHostEnvironment env, 
+            ILogger<Startup> logger)
         {
-            env.EnvironmentName = "Production";
+            //env.EnvironmentName = "Production";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -84,7 +92,6 @@ namespace OnlineAuction
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/Chat/Index");
             });
-            
         }
     }
 }

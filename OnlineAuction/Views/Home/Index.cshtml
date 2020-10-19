@@ -3,7 +3,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-<a asp-action="CreateLot">Создать лот</a>
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-action="CreateLot">Создать лот</a>
+}
 <table class="table">
     <tr><th>Лот</th><th>Создатель лота</th><th>Название категории</th><th>Описание</th><th>Текущая цена(бел. руб.)</th></tr>
     @foreach (var lot in Model)

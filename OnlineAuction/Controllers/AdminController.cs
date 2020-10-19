@@ -16,8 +16,8 @@ namespace OnlineAuction.Controllers
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        private UserManager<User> _userManager;
-        RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationContext _context;
         
         public AdminController(UserManager<User> userManager, 

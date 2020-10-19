@@ -79,3 +79,7 @@ body {
 .verified-chekbox{
   margin: 0 0 0 20px;
 }
+
+li{
+  max-height: 40px;
+}

@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
+using OnlineAuction.Services.Interfaces;
 
-namespace OnlineAuction.Services
+namespace OnlineAuction.Services.Defenitions
 {
     public class EmailService: IEmailService
     {

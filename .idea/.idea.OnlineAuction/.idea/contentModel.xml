@@ -47,8 +47,16 @@
           <e p="launchSettings.json" t="Include" />
         </e>
         <e p="Services" t="Include">
-          <e p="EmailService.cs" t="Include" />
-          <e p="IEmailService.cs" t="Include" />
+          <e p="Defenitions" t="Include">
+            <e p="DeleteService.cs" t="Include" />
+            <e p="EmailService.cs" t="Include" />
+            <e p="LotService.cs" t="Include" />
+          </e>
+          <e p="Interfaces" t="Include">
+            <e p="IDeleteService.cs" t="Include" />
+            <e p="IEmailService.cs" t="Include" />
+            <e p="ILotService.cs" t="Include" />
+          </e>
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="ViewModels" t="Include">
