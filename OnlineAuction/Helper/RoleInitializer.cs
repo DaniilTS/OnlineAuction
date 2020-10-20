@@ -1,12 +1,16 @@
-﻿using OnlineAuction.Models;
+﻿using System.Linq;
+using OnlineAuction.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using OnlineAuction.Data;
 
 namespace OnlineAuction.Helper
 {
     public class RoleInitializer
     {
-        public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task InitializeAsync(UserManager<User> userManager, 
+            RoleManager<IdentityRole> roleManager, ApplicationContext context)
         {
             string adminName = "admin";
             string adminEmail = "d.tsukrov@gmail.com";
@@ -19,7 +23,7 @@ namespace OnlineAuction.Helper
             {
                 await roleManager.CreateAsync(new IdentityRole("user"));
             }
-
+            
             if (await userManager.FindByNameAsync(adminEmail)==null)
             {
                 User admin = new User
@@ -33,6 +37,17 @@ namespace OnlineAuction.Helper
                 {
                     await userManager.AddToRoleAsync(admin, "admin");
                 }
+            }
+
+            if ((await context.Categories.FindAsync(1)==null))
+            {
+                Category category = new Category
+                {
+                    Name = "-All-"
+                };
+                
+                await context.Categories.AddAsync(category);
+                await context.SaveChangesAsync();
             }
         }
     }

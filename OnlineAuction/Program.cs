@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OnlineAuction.Data;
 using OnlineAuction.Models;
 using OnlineAuction.Helper;
 using Serilog;
@@ -29,7 +30,8 @@ namespace OnlineAuction
                 {
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    await RoleInitializer.InitializeAsync(userManager, rolesManager);
+                    var context = services.GetRequiredService<ApplicationContext>();
+                    await RoleInitializer.InitializeAsync(userManager, rolesManager, context);
                 }
                 catch (Exception ex)
                 {

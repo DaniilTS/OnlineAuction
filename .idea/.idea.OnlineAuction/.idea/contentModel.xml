@@ -99,6 +99,7 @@
           </e>
           <e p="Home" t="Include">
             <e p="CreateLot.cshtml" t="Include" />
+            <e p="Details.cshtml" t="Include" />
             <e p="EditLot.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
             <e p="Privacy.cshtml" t="Include" />

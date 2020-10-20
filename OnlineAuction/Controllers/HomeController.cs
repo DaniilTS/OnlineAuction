@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -132,6 +133,41 @@ namespace OnlineAuction.Controllers
             }
 
             return View(model);
+        }
+        
+        public async Task<IActionResult> RaisePrice(int id, string userName)
+        {
+            var lot = await _context.Lots.FindAsync(id);
+            lot.StartCurrency += 50;
+            
+            lot.WiningUserId = userName;
+            var user = await _userManager.FindByNameAsync(userName);
+
+            lot.WiningUserName = user.UserName;
+            
+            _context.Lots.Update(lot);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction("Details", new {id = id});
+        }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var lot = _context.Lots.Where(i => i.Id == id)
+                .Include(u => u.User)
+                .Include( c => c.Category)
+                .First();
+            if (lot == null)
+            {
+                return NotFound();
+            }
+    
+            return View(lot);
         }
     }
 }

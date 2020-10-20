@@ -1,0 +1,42 @@
+﻿@model OnlineAuction.Models.Lot
+
+@{
+    ViewBag.Title = "Информация о лоте";
+}
+
+<p>Создатель лота: @Model.User.UserName</p>
+<p>Название: @Model.Name</p>
+<p>Описание: @Model.Description</p>
+<p>Текущая цена: @Model.StartCurrency руб.</p>
+<p>Категория товара: @Model.Category.Name</p>
+<p>Начало торгов: @Model.PublicationDate</p>
+<p>конец торгов: @Model.FinishDate</p>
+<p>Победитель на данный момент: @Model.WiningUserName</p>
+<form asp-action="DeleteLot" asp-route-id="@Model.Id" method="post">
+    @if (User.Identity.Name == Model.User.UserName||User.IsInRole("admin"))
+    {
+        <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Id">Изменить</a>
+    }
+    @if (User.Identity.Name == Model.WiningUserName)
+    {
+        <a class="Disabled btn btn-sm btn-primary"
+           asp-action="RaisePrice"
+           asp-route-id="@Model.Id"
+           asp-route-username="@User.Identity.Name">Поднять цену</a>
+        
+    }
+    else
+    {
+        <a class="btn btn-sm btn-primary"
+           asp-action="RaisePrice"
+           asp-route-id="@Model.Id"
+           asp-route-username="@User.Identity.Name">Поднять цену</a>
+        
+    }
+    @if (User.Identity.Name == Model.User.UserName || User.IsInRole("admin"))
+    {
+        <button type="submit" class="btn btn-sm btn-danger">
+            Удалить
+        </button>
+    }
+</form>
