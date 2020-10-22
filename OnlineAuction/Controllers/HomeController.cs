@@ -161,13 +161,55 @@ namespace OnlineAuction.Controllers
             var lot = _context.Lots.Where(i => i.Id == id)
                 .Include(u => u.User)
                 .Include( c => c.Category)
+                .Include(com=>com.Comments)
+                    .ThenInclude(i => i.User)
                 .First();
+            
             if (lot == null)
             {
                 return NotFound();
             }
+            
+            LotViewModel model = new LotViewModel
+            {
+                Lot = lot
+            };
     
-            return View(lot);
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> WriteComment(int lotId, CommentInput commentInput)
+        {
+            string userName = HttpContext.User.Identity.Name;
+            var lot = await _context.Lots.FindAsync(lotId);
+            var user = await _userManager.FindByNameAsync(userName);
+            
+            Comment comment = new Comment
+            {
+                UserId = user.Id,
+                User = user,
+                LotId = lotId,
+                Lot = lot,
+                Text = commentInput.Comment
+            };
+
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction("Details", new {id = lotId});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment(int lotId, int commentId)
+        {
+            var comment = await _context.Comments.FindAsync(commentId);
+            
+            _context.Comments.Remove(comment);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction("Details", new {id = lotId});
         }
     }
 }
