@@ -46,7 +46,7 @@
       asp-route-lotId="@Model.Lot.Id"
       method="post">
     <div class="form-group">
-        <input asp-for="@Model.Comment" type="text" class="form-control" >
+        <input asp-for="@Model.Comment" type="text" class="form-control" autocomplete="off">
         <button class="btn btn-sm btn-primary" type="submit" style="margin: 5px 0 0 0">Написать коммент</button>
     </div>
 </form>
@@ -55,11 +55,15 @@
 {
     <div class="form-group row" style="margin: 0 0 0 5px">
         <p style="margin: 0 5px 0 0">@comment.User.UserName: @comment.Text</p>
-        <form method="post">
-            <button class="btn btn-sm btn-danger"
-                    asp-action="DeleteComment"
-                    asp-route-commentid="@comment.Id"
-                    asp-route-lotid="@Model.Lot.Id">Удалить</button>
-        </form>
+        @if (User.IsInRole("admin")||User.Identity.Name==comment.User.UserName)
+        {
+            <form method="post">
+                <button class="btn btn-sm btn-danger"
+                        asp-action="DeleteComment"
+                        asp-route-commentid="@comment.Id"
+                        asp-route-lotid="@Model.Lot.Id">Удалить</button>
+            </form>
+        }
+        <hr>
     </div>
 }

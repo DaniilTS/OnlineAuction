@@ -92,7 +92,7 @@ namespace OnlineAuction.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteLot(int id)
         {
-            await _deleteService.DeleteLot(id, _context);
+            await _deleteService.DeleteLotAsync(id, _context);
             return RedirectToAction("Index");
         }
 
@@ -204,10 +204,7 @@ namespace OnlineAuction.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteComment(int lotId, int commentId)
         {
-            var comment = await _context.Comments.FindAsync(commentId);
-            
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+            await _deleteService.DeleteCommentAsync(lotId, commentId, _context);
             
             return RedirectToAction("Details", new {id = lotId});
         }
