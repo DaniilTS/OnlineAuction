@@ -63,7 +63,7 @@ namespace OnlineAuction
             IWebHostEnvironment env, 
             ILogger<Startup> logger)
         {
-            //env.EnvironmentName = "Production";
+            env.EnvironmentName = "Production";
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -81,7 +81,7 @@ namespace OnlineAuction
 
             app.UseRouting();
             
-            /*app.UseSerilogRequestLogging();*/
+            app.UseSerilogRequestLogging();
             app.UseAuthentication();
             app.UseAuthorization();
 
