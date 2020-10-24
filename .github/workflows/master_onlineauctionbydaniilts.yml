@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'onlineauctionbydaniilts'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_b3ffdbaba7494f4c9394c97e4927b910 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_81531e9cb6b141469d13f4a5278d5d9d }}
         package: ${{env.DOTNET_ROOT}}/myapp 
