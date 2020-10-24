@@ -64,6 +64,7 @@ namespace OnlineAuction
             ILogger<Startup> logger)
         {
             env.EnvironmentName = "Production";
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

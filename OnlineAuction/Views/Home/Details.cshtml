@@ -19,7 +19,9 @@
         {
             <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Lot.Id">Изменить</a>
         }
-        @if (User.Identity.Name == Model.Lot.WiningUserName)
+        @if (User.Identity.Name == Model.Lot.WiningUserName||
+             (Model.Lot.PublicationDate<DateTime.Now||
+              Model.Lot.FinishDate>DateTime.Now))
         {
             <a class="Disabled btn btn-sm btn-primary"
                asp-action="RaisePrice"

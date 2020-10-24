@@ -15,7 +15,8 @@ namespace OnlineAuction.Data
             : base(options)
         {
             //Database.EnsureDeleted();
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
+            //Database.Migrate();
         }
     }
 }

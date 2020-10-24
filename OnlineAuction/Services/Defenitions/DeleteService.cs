@@ -8,6 +8,7 @@ namespace OnlineAuction.Services.Defenitions
 {
     public class DeleteService: IDeleteService
     {
+        //добавить контекс
         public async Task DeleteLotAsync(int id, ApplicationContext context)
         {
             var lot = await context.Lots.FindAsync(id);

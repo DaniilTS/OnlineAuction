@@ -125,7 +125,7 @@ namespace OnlineAuction.Controllers
             if(ModelState.IsValid && (model.FinishDate > model.PublicationDate))
             {
                 await _lotService.UpdateLotPost(model.Id, model, _context);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new {id = model.Id});
             }
             else
             {

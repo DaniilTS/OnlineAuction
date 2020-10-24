@@ -2,14 +2,23 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UserSecretsId>6a4b4cde-09a3-407d-9a42-27fa3204c41f</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="MailKit" Version="2.9.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-rc.1.20451.17" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0-rc.1.20451.13" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-rc.1.20451.13" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
       <PackageReference Include="Serilog" Version="2.10.0" />
       <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
       <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />

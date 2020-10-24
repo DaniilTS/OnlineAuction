@@ -25,7 +25,20 @@
           <e p="ChatHub.cs" t="Include" />
         </e>
         <e p="libman.json" t="Include" />
-        <e p="Logs" t="Include" />
+        <e p="Logs" t="Include">
+          <e p="cp_20201023.log" t="Include" />
+          <e p="cp_20201024.log" t="Include" />
+          <e p="cp_20201024_001.log" t="Include" />
+          <e p="cp_20201024_002.log" t="Include" />
+          <e p="cp_20201024_003.log" t="Include" />
+          <e p="ex_20201023.log" t="Include" />
+          <e p="ex_20201024.log" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20201024085903_initial.cs" t="Include" />
+          <e p="20201024085903_initial.Designer.cs" t="Include" />
+          <e p="ApplicationContextModelSnapshot.cs" t="Include" />
+        </e>
         <e p="Models" t="Include">
           <e p="Category.cs" t="Include" />
           <e p="Comment.cs" t="Include" />
@@ -49,10 +62,17 @@
             <e p="OnlineAuctionByDaniilTS - Web Deploy.pubxml" t="Include" />
           </e>
           <e p="ServiceDependencies" t="Include">
+            <e p="local" t="Include">
+              <e p="mssql1.arm.json" t="Include" />
+            </e>
             <e p="OnlineAuctionByDaniilTS - Web Deploy" t="Include">
+              <e p="mssql1.arm.json" t="Include" />
               <e p="profile.arm.json" t="Include" />
             </e>
           </e>
+          <e p="serviceDependencies.json" t="Include" />
+          <e p="serviceDependencies.local.json" t="Include" />
+          <e p="serviceDependencies.OnlineAuctionByDaniilTS - Web Deploy.json" t="Include" />
         </e>
         <e p="Services" t="Include">
           <e p="Defenitions" t="Include">
