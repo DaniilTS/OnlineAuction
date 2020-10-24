@@ -3,7 +3,18 @@
 @{
     ViewBag.Title = "Информация о лоте";
 }
-
+@if (DateTime.Now>Model.Lot.FinishDate)
+{
+    <h3>Торги завершены</h3>
+}
+else if(DateTime.Now<Model.Lot.PublicationDate)
+{
+    <h3>Торги ещё не начались</h3>
+}
+else
+{
+    <h3>Торги идут</h3>
+}
 <p>Создатель лота: @Model.Lot.User.UserName</p>
 <p>Название: @Model.Lot.Name</p>
 <p>Описание: @Model.Lot.Description</p>
@@ -19,21 +30,22 @@
         {
             <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Lot.Id">Изменить</a>
         }
-        @if (User.Identity.Name == Model.Lot.WiningUserName||
-             (Model.Lot.PublicationDate<DateTime.Now||
-              Model.Lot.FinishDate>DateTime.Now))
+        @if (DateTime.Now < Model.Lot.FinishDate && DateTime.Now > Model.Lot.PublicationDate)
         {
-            <a class="Disabled btn btn-sm btn-primary"
-               asp-action="RaisePrice"
-               asp-route-id="@Model.Lot.Id"
-               asp-route-username="@User.Identity.Name">Поднять цену</a>
-        }
-        else
-        {
-            <a class="btn btn-sm btn-primary"
-               asp-action="RaisePrice"
-               asp-route-id="@Model.Lot.Id"
-               asp-route-username="@User.Identity.Name">Поднять цену</a>
+            @if (User.Identity.Name == Model.Lot.WiningUserName)
+            {
+                <a class="Disabled btn btn-sm btn-primary"
+                   asp-action="RaisePrice"
+                   asp-route-id="@Model.Lot.Id"
+                   asp-route-username="@User.Identity.Name">Поднять цену</a>
+            }
+            else
+            {
+                <a class="btn btn-sm btn-primary"
+                   asp-action="RaisePrice"
+                   asp-route-id="@Model.Lot.Id"
+                   asp-route-username="@User.Identity.Name">Поднять цену</a>
+            }
         }
         @if (User.Identity.Name == Model.Lot.User.UserName || User.IsInRole("admin"))
         {

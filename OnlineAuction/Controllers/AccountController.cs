@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineAuction.ViewModels;
 using OnlineAuction.Models;
 using Microsoft.AspNetCore.Identity;
+using MimeKit;
 using OnlineAuction.Services;
 using OnlineAuction.Services.Interfaces;
 
