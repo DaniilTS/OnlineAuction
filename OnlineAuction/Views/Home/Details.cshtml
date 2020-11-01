@@ -3,11 +3,13 @@
 @{
     ViewBag.Title = "Информация о лоте";
 }
-@if (DateTime.UtcNow>Model.Lot.FinishDate)
+@if (DateTime.UtcNow.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours) > 
+     Model.Lot.FinishDate.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours))
 {
     <h3>Торги завершены</h3>
 }
-else if(DateTime.UtcNow<Model.Lot.PublicationDate)
+else if(DateTime.UtcNow.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours) <
+        Model.Lot.PublicationDate.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours))
 {
     <h3>Торги ещё не начались</h3>
 }
@@ -15,14 +17,15 @@ else
 {
     <h3>Торги идут</h3>
 }
-<p>Текущая дата и время: @DateTime.UtcNow.ToLocalTime()</p><br>
+
+<p>Текущая дата и время: @DateTime.UtcNow.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours)</p><br>
 <p>Создатель лота: @Model.Lot.User.UserName</p>
 <p>Название: @Model.Lot.Name</p>
 <p>Описание: @Model.Lot.Description</p>
 <p>Текущая цена: @Model.Lot.StartCurrency руб.</p>
 <p>Категория товара: @Model.Lot.Category.Name</p>
-<p>Начало торгов: @Model.Lot.PublicationDate.ToLocalTime()</p>
-<p>конец торгов: @Model.Lot.FinishDate.ToLocalTime()</p>
+<p>Начало торгов: @Model.Lot.PublicationDate.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours)</p>
+<p>конец торгов: @Model.Lot.FinishDate.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours)</p>
 <p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
 
 <form asp-action="DeleteLot" asp-route-id="@Model.Lot.Id" method="post">
@@ -31,9 +34,13 @@ else
         {
             <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Lot.Id">Изменить</a>
         }
-        @if (DateTime.UtcNow < Model.Lot.FinishDate && DateTime.UtcNow > Model.Lot.PublicationDate)
+        @if (DateTime.UtcNow.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours) <
+             Model.Lot.FinishDate.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours) && 
+             DateTime.UtcNow.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours) >
+             Model.Lot.PublicationDate.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours))
         {
-            @if (User.Identity.Name == Model.Lot.WiningUserName)
+            @if (User.Identity.Name == Model.Lot.WiningUserName||
+                 User.Identity.Name == Model.Lot.User.UserName)
             {
                 <a class="Disabled btn btn-sm btn-primary"
                    asp-action="RaisePrice"
