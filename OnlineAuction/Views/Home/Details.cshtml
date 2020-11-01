@@ -30,7 +30,7 @@ else
         {
             <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Lot.Id">Изменить</a>
         }
-        @if (DateTime.Now < Model.Lot.FinishDate && DateTime.Now > Model.Lot.PublicationDate)
+        @if (DateTime.UtcNow < Model.Lot.FinishDate && DateTime.UtcNow > Model.Lot.PublicationDate)
         {
             @if (User.Identity.Name == Model.Lot.WiningUserName)
             {

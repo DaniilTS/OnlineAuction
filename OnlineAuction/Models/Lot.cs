@@ -28,5 +28,7 @@ namespace OnlineAuction.Models
         
         [DataType(DataType.DateTime)] 
         public DateTime FinishDate { get; set; }
+        
+        public Boolean IsEmailSended { get; set; }
     }
 }

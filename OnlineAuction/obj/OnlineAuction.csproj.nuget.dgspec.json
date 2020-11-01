@@ -38,6 +38,22 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.7.17, )"
+            },
+            "Hangfire.AspNetCore": {
+              "target": "Package",
+              "version": "[1.7.17, )"
+            },
+            "Hangfire.Core": {
+              "target": "Package",
+              "version": "[1.7.17, )"
+            },
+            "Hangfire.SqlServer": {
+              "target": "Package",
+              "version": "[1.7.17, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[2.9.0, )"

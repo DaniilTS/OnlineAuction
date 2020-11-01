@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -14,10 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using OnlineAuction.Data;
 using OnlineAuction.Hubs;
-using OnlineAuction.Services;
-using OnlineAuction.Hubs;
 using OnlineAuction.Services.Defenitions;
 using OnlineAuction.Services.Interfaces;
+using Hangfire;
 
 namespace OnlineAuction
 {
@@ -53,6 +48,9 @@ namespace OnlineAuction
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             
             services.AddSignalR();
+            
+            services.AddHangfire(x => x.UseSqlServerStorage(
+                Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IDeleteService, DeleteService>();
             services.AddScoped<ILotService, LotService>();
@@ -63,7 +61,7 @@ namespace OnlineAuction
             IWebHostEnvironment env, 
             ILogger<Startup> logger)
         {
-            env.EnvironmentName = "Production";
+            //env.EnvironmentName = "Production";
 
             if (env.IsDevelopment())
             {
@@ -75,6 +73,8 @@ namespace OnlineAuction
                 app.UseHsts();
             }
 
+            app.UseSerilogRequestLogging();
+            
             app.UseStatusCodePagesWithReExecute("/Error/Index", "?statusCode={0}");
             
             app.UseHttpsRedirection();
@@ -82,9 +82,11 @@ namespace OnlineAuction
 
             app.UseRouting();
             
-            app.UseSerilogRequestLogging();
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
 
             app.UseEndpoints(endpoints =>
             {

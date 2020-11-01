@@ -19,6 +19,7 @@
           <e p="ApplicationContext.cs" t="Include" />
         </e>
         <e p="Helper" t="Include">
+          <e p="BackgroundEndLotCheking.cs" t="Include" />
           <e p="RoleInitializer.cs" t="Include" />
         </e>
         <e p="Hubs" t="Include">
@@ -26,17 +27,17 @@
         </e>
         <e p="libman.json" t="Include" />
         <e p="Logs" t="Include">
-          <e p="cp_20201023.log" t="Include" />
-          <e p="cp_20201024.log" t="Include" />
-          <e p="cp_20201024_001.log" t="Include" />
-          <e p="cp_20201024_002.log" t="Include" />
-          <e p="cp_20201024_003.log" t="Include" />
-          <e p="ex_20201023.log" t="Include" />
-          <e p="ex_20201024.log" t="Include" />
+          <e p="cp_20201030.log" t="Include" />
+          <e p="cp_20201101.log" t="Include" />
+          <e p="cp_20201101_001.log" t="Include" />
+          <e p="ex_20201030.log" t="Include" />
+          <e p="ex_20201101.log" t="Include" />
         </e>
         <e p="Migrations" t="Include">
           <e p="20201024085903_initial.cs" t="Include" />
           <e p="20201024085903_initial.Designer.cs" t="Include" />
+          <e p="20201101110922_BackgroundEmailSending.cs" t="Include" />
+          <e p="20201101110922_BackgroundEmailSending.Designer.cs" t="Include" />
           <e p="ApplicationContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">

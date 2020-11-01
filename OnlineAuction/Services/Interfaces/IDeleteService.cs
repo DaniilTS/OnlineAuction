@@ -8,7 +8,7 @@ namespace OnlineAuction.Services.Interfaces
     public interface IDeleteService
     {
         
-        Task DeleteLotAsync(int id, ApplicationContext context);
-        Task DeleteCommentAsync(int lotId, int commentId, ApplicationContext context);
+        Task DeleteLotAsync(int id);
+        Task DeleteCommentAsync(int lotId, int commentId);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OnlineAuction.Data;
+using OnlineAuction.Helper;
 using OnlineAuction.Models;
 using OnlineAuction.Services;
 using OnlineAuction.Services.Interfaces;
@@ -38,6 +40,7 @@ namespace OnlineAuction.Controllers
 
         public async Task<IActionResult> Index()
         {
+            RecurringJob.AddOrUpdate<BackgroundEndLotCheking>(x=>x.ChekLot(), Cron.Minutely);
             return View(await _context.Lots
                 .Include(u => u.User)
                 .Include(c=> c.Category)
@@ -77,7 +80,8 @@ namespace OnlineAuction.Controllers
                     StartCurrency = model.StartCurrency,
                     PublicationDate = model.PublicationDate,
                     FinishDate = model.FinishDate,
-                    User = await _userManager.GetUserAsync(HttpContext.User)
+                    User = await _userManager.GetUserAsync(HttpContext.User),
+                    IsEmailSended = false
                 };
 
                 await _context.Lots.AddAsync(lot);
@@ -92,7 +96,7 @@ namespace OnlineAuction.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteLot(int id)
         {
-            await _deleteService.DeleteLotAsync(id, _context);
+            await _deleteService.DeleteLotAsync(id);
             return RedirectToAction("Index");
         }
 
@@ -124,7 +128,7 @@ namespace OnlineAuction.Controllers
         {
             if(ModelState.IsValid && (model.FinishDate > model.PublicationDate))
             {
-                await _lotService.UpdateLotPost(model.Id, model, _context);
+                await _lotService.UpdateLotPost(model.Id, model);
                 return RedirectToAction("Details", new {id = model.Id});
             }
             else
@@ -140,9 +144,8 @@ namespace OnlineAuction.Controllers
             var lot = await _context.Lots.FindAsync(id);
             lot.StartCurrency += 50;
             
-            lot.WiningUserId = userName;
             var user = await _userManager.FindByNameAsync(userName);
-
+            lot.WiningUserId = user.Id;
             lot.WiningUserName = user.UserName;
             
             _context.Lots.Update(lot);
@@ -204,7 +207,7 @@ namespace OnlineAuction.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteComment(int lotId, int commentId)
         {
-            await _deleteService.DeleteCommentAsync(lotId, commentId, _context);
+            await _deleteService.DeleteCommentAsync(lotId, commentId);
             
             return RedirectToAction("Details", new {id = lotId});
         }
