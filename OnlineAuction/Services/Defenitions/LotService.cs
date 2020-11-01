@@ -25,8 +25,8 @@ namespace OnlineAuction.Services.Defenitions
             lot.StartCurrency = model.StartCurrency;
             lot.CategoryId = model.CategoryId;
             lot.Category = await _context.Categories.FindAsync(lot.CategoryId);
-            lot.PublicationDate = model.PublicationDate;
-            lot.FinishDate = model.FinishDate;
+            lot.PublicationDate = model.PublicationDate.ToUniversalTime();
+            lot.FinishDate = model.FinishDate.ToUniversalTime();
 
             _context.Lots.Update(lot);
             await _context.SaveChangesAsync();

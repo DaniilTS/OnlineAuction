@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "Информация о лоте";
 }
-@if (DateTime.Now>Model.Lot.FinishDate)
+@if (DateTime.UtcNow>Model.Lot.FinishDate)
 {
     <h3>Торги завершены</h3>
 }
-else if(DateTime.Now<Model.Lot.PublicationDate)
+else if(DateTime.UtcNow<Model.Lot.PublicationDate)
 {
     <h3>Торги ещё не начались</h3>
 }
@@ -15,13 +15,14 @@ else
 {
     <h3>Торги идут</h3>
 }
+<p>Текущая дата и время: @DateTime.UtcNow.ToLocalTime()</p><br>
 <p>Создатель лота: @Model.Lot.User.UserName</p>
 <p>Название: @Model.Lot.Name</p>
 <p>Описание: @Model.Lot.Description</p>
 <p>Текущая цена: @Model.Lot.StartCurrency руб.</p>
 <p>Категория товара: @Model.Lot.Category.Name</p>
-<p>Начало торгов: @Model.Lot.PublicationDate</p>
-<p>конец торгов: @Model.Lot.FinishDate</p>
+<p>Начало торгов: @Model.Lot.PublicationDate.ToLocalTime()</p>
+<p>конец торгов: @Model.Lot.FinishDate.ToLocalTime()</p>
 <p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
 
 <form asp-action="DeleteLot" asp-route-id="@Model.Lot.Id" method="post">
