@@ -22,7 +22,7 @@ namespace OnlineAuction.Services.Defenitions
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync("smtp.mail.ru", 25, false);
-                await client.AuthenticateAsync("d.tsukrov@mail.ru", "Daniil01323");
+                await client.AuthenticateAsync("d.tsukrov@mail.ru", "Daniil_200156");
                 await client.SendAsync(emailMessage);
                 await client.DisconnectAsync(true);
             }
