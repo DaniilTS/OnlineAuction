@@ -77,8 +77,8 @@ namespace OnlineAuction.Controllers
                     Category = await _context.Categories.FindAsync(model.CategoryId),
                     Description = model.Description,
                     StartCurrency = model.StartCurrency,
-                    PublicationDate = model.PublicationDate.ToUniversalTime(),
-                    FinishDate = model.FinishDate.ToUniversalTime(),
+                    PublicationDate = model.PublicationDate.ToUniversalTime().ToUniversalTime(),
+                    FinishDate = model.FinishDate.ToUniversalTime().ToUniversalTime(),
                     User = await _userManager.GetUserAsync(HttpContext.User),
                     IsEmailSended = false
                 };
