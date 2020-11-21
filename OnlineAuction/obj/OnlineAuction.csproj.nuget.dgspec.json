@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Stanislav\\Documents\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj": {}
+    "C:\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Stanislav\\Documents\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj": {
+    "C:\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Stanislav\\Documents\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj",
+        "projectUniqueName": "C:\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj",
         "projectName": "OnlineAuction",
-        "projectPath": "C:\\Users\\Stanislav\\Documents\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj",
+        "projectPath": "C:\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj",
         "packagesPath": "C:\\Users\\Stanislav\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Stanislav\\Documents\\GitHub\\OnlineAuction\\OnlineAuction\\obj\\",
+        "outputPath": "C:\\GitHub\\OnlineAuction\\OnlineAuction\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Stanislav\\AppData\\Roaming\\NuGet\\NuGet.Config",

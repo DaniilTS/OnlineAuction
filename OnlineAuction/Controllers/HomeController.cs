@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using OnlineAuction.Data;
 using OnlineAuction.Helper;
 using OnlineAuction.Models;
-using OnlineAuction.Services;
 using OnlineAuction.Services.Interfaces;
 using OnlineAuction.ViewModels;
 
@@ -69,7 +65,10 @@ namespace OnlineAuction.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateLot(CreateLotViewModel model)
         {
-            if (ModelState.IsValid && (model.FinishDate > model.PublicationDate))
+            if (ModelState.IsValid 
+                && (model.FinishDate > model.PublicationDate)
+                && (model.PublicationDate > DateTime.Now)
+                && (model.FinishDate > DateTime.Now))
             {
                 Lot lot = new Lot
                 {

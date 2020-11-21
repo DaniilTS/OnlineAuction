@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Stanislav\AppData\local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Stanislav\AppData\local\JetBrains\Rider2020.2\resharper-host\local\Transient\Rider\v202\SolutionCaches\_OnlineAuction.-1979326097.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Stanislav\Documents\GitHub\OnlineAuction" t="IncludeFlat">
+    <e p="C:\GitHub\OnlineAuction" t="IncludeFlat">
       <e p="OnlineAuction" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
@@ -31,8 +29,10 @@
           <e p="cp_20201101.log" t="Include" />
           <e p="cp_20201101_001.log" t="Include" />
           <e p="cp_20201101_002.log" t="Include" />
+          <e p="cp_20201121.log" t="Include" />
           <e p="ex_20201030.log" t="Include" />
           <e p="ex_20201101.log" t="Include" />
+          <e p="ex_20201121.log" t="Include" />
         </e>
         <e p="Migrations" t="Include">
           <e p="20201024085903_initial.cs" t="Include" />
@@ -229,5 +229,7 @@
       <e p="OnlineAuction.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
+    <e p="C:\Users\Stanislav\AppData\local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Stanislav\AppData\local\JetBrains\Rider2020.2\resharper-host\local\Transient\Rider\v202\SolutionCaches\_OnlineAuction.-113521884.00" t="ExcludeRecursive" />
   </component>
 </project>

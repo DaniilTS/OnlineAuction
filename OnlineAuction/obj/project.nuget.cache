@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hdu2iZWqe/Mrc+MH8EfqHL6WxPuavswwxeO6fyTV6OL2/ed4MJFA/3/oIZaIJNFrqS1pZLSqoqoDdJpQaEJH+g==",
+  "dgSpecHash": "gzgwyEgb/9Yaw/cw6hXprbceuzRsRUueVjoQv8SF0xftV3MZxWL+ASVi60RAC91z2b7JpjF82sGpwcX89/nxxA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Stanislav\\Documents\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj",
+  "projectFilePath": "C:\\GitHub\\OnlineAuction\\OnlineAuction\\OnlineAuction.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stanislav\\.nuget\\packages\\hangfire\\1.7.17\\hangfire.1.7.17.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\hangfire.aspnetcore\\1.7.17\\hangfire.aspnetcore.1.7.17.nupkg.sha512",
