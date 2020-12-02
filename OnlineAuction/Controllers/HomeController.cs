@@ -13,6 +13,7 @@ using OnlineAuction.Helper;
 using OnlineAuction.Models;
 using OnlineAuction.Services.Interfaces;
 using OnlineAuction.ViewModels;
+using Org.BouncyCastle.Asn1.Cms;
 
 namespace OnlineAuction.Controllers
 {
@@ -36,10 +37,9 @@ namespace OnlineAuction.Controllers
 
         public async Task<IActionResult> Index()
         {
-            RecurringJob.AddOrUpdate<BackgroundEndLotCheking>(x=>x.ChekLot(), Cron.Minutely);
             return View(await _context.Lots
                 .Include(u => u.User)
-                .Include(c=> c.Category)
+                .Include(c => c.Category)
                 .ToListAsync());
         }
 
@@ -57,15 +57,15 @@ namespace OnlineAuction.Controllers
         [Authorize]
         public IActionResult CreateLot()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(),"Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name");
             return View();
         }
-        
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateLot(CreateLotViewModel model)
         {
-            if (ModelState.IsValid 
+            if (ModelState.IsValid
                 && (model.FinishDate > model.PublicationDate)
                 && (model.PublicationDate > DateTime.Now)
                 && (model.FinishDate > DateTime.Now))
@@ -77,21 +77,24 @@ namespace OnlineAuction.Controllers
                     Category = await _context.Categories.FindAsync(model.CategoryId),
                     Description = model.Description,
                     StartCurrency = model.StartCurrency,
-                    PublicationDate = model.PublicationDate.ToUniversalTime().ToUniversalTime(),
-                    FinishDate = model.FinishDate.ToUniversalTime().ToUniversalTime(),
+                    PublicationDate = model.PublicationDate.ToUniversalTime(),
+                    FinishDate = model.FinishDate.ToUniversalTime(),
                     User = await _userManager.GetUserAsync(HttpContext.User),
                     IsEmailSended = false
                 };
 
                 await _context.Lots.AddAsync(lot);
                 await _context.SaveChangesAsync();
+
+                long diff = (lot.FinishDate - DateTime.UtcNow).Minutes + 1;
+                BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id), TimeSpan.FromMinutes(diff));
                 return RedirectToAction("Index");
             }
 
             ModelState.AddModelError("odd user", "Дата конца должна быть больше даты начала");
             return View(model);
         }
-        
+
         [Authorize]
         public async Task<IActionResult> DeleteLot(int id)
         {
@@ -106,7 +109,7 @@ namespace OnlineAuction.Controllers
             {
                 return NotFound();
             }
-            
+
             EditLotViewModel model = new EditLotViewModel
             {
                 Name = lot.Name,
@@ -117,15 +120,15 @@ namespace OnlineAuction.Controllers
                 PublicationDate = lot.PublicationDate,
                 FinishDate = lot.FinishDate
             };
-            
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(),"Id", "Name");
+
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name");
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> EditLot(EditLotViewModel model)
         {
-            if(ModelState.IsValid && (model.FinishDate > model.PublicationDate))
+            if (ModelState.IsValid && (model.FinishDate > model.PublicationDate))
             {
                 await _lotService.UpdateLotPost(model.Id, model);
                 return RedirectToAction("Details", new {id = model.Id});
@@ -137,19 +140,19 @@ namespace OnlineAuction.Controllers
 
             return View(model);
         }
-        
+
         public async Task<IActionResult> RaisePrice(int id, string userName)
         {
             var lot = await _context.Lots.FindAsync(id);
             lot.StartCurrency += 50;
-            
+
             var user = await _userManager.FindByNameAsync(userName);
             lot.WiningUserId = user.Id;
             lot.WiningUserName = user.UserName;
-            
+
             _context.Lots.Update(lot);
             await _context.SaveChangesAsync();
-            
+
             return RedirectToAction("Details", new {id = id});
         }
 
@@ -162,21 +165,21 @@ namespace OnlineAuction.Controllers
 
             var lot = _context.Lots.Where(i => i.Id == id)
                 .Include(u => u.User)
-                .Include( c => c.Category)
-                .Include(com=>com.Comments)
-                    .ThenInclude(i => i.User)
+                .Include(c => c.Category)
+                .Include(com => com.Comments)
+                .ThenInclude(i => i.User)
                 .First();
-            
+
             if (lot == null)
             {
                 return NotFound();
             }
-            
+
             LotViewModel model = new LotViewModel
             {
                 Lot = lot
             };
-    
+
             return View(model);
         }
 
@@ -187,7 +190,7 @@ namespace OnlineAuction.Controllers
             string userName = HttpContext.User.Identity.Name;
             var lot = await _context.Lots.FindAsync(lotId);
             var user = await _userManager.FindByNameAsync(userName);
-            
+
             Comment comment = new Comment
             {
                 UserId = user.Id,
@@ -199,7 +202,7 @@ namespace OnlineAuction.Controllers
 
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
-            
+
             return RedirectToAction("Details", new {id = lotId});
         }
 
@@ -207,7 +210,7 @@ namespace OnlineAuction.Controllers
         public async Task<IActionResult> DeleteComment(int lotId, int commentId)
         {
             await _deleteService.DeleteCommentAsync(lotId, commentId);
-            
+
             return RedirectToAction("Details", new {id = lotId});
         }
     }
