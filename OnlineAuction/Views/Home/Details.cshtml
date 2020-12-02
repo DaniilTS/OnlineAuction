@@ -16,33 +16,14 @@ else
     <h3>Торги идут</h3>
 }
 
-<p>UtcNow: @DateTime.UtcNow</p>
-<p>Now: @DateTime.Now</p>
 <p>Создатель лота: @Model.Lot.User.UserName</p>
 <p>Название: @Model.Lot.Name</p>
 <p>Описание: @Model.Lot.Description</p>
 <p>Текущая цена: @Model.Lot.StartCurrency руб.</p>
 <p>Категория товара: @Model.Lot.Category.Name</p>
-<p>Начало торгов: <span id="PublicationDate">@Model.Lot.PublicationDate/*.ToString("O")*/</span></p>
-<p>конец торгов: <span id="FinishDate">@Model.Lot.FinishDate/*.ToString("O")*/</span></p>
+<p>Начало торгов: <span id="PublicationDate">@Model.Lot.PublicationDate.AddHours(int.Parse(Model.Lot.User.TimeZone.Substring(4, 3)))</span></p>
+<p>конец торгов: <span id="FinishDate">@Model.Lot.FinishDate.AddHours(int.Parse(Model.Lot.User.TimeZone.Substring(4, 3)))</span></p>
 <p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
-
-@*<script type="text/javascript" id="CorrectTimeZone">
-    const today = new Date();
-    const diff = today.getUTCHours() - today.getHours();
-    
-    let publicationDateText = document.getElementById('PublicationDate').innerText;
-    let finishDateText = document.getElementById('FinishDate').innerText;
-    
-    let publicationDate = new Date(publicationDateText);
-    let finishDate = new Date(finishDateText);
-    
-    publicationDate.setHours(publicationDate.getHours() + diff);
-    finishDate.setHours(finishDate.getHours() + diff);
-    
-    document.getElementById('PublicationDate').innerText = publicationDate.toString().substring(0, 21);
-    document.getElementById('FinishDate').innerText = finishDate.toString().substring(0, 21);
-</script>*@
 
 <form asp-action="DeleteLot" asp-route-id="@Model.Lot.Id" method="post">
     <div class="form-group">

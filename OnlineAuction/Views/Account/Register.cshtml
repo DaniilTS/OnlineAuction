@@ -30,6 +30,10 @@
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
-        <input type="submit" value="Регистрация" />
+        <label asp-for="TimeZone"></label><br/>
+        <select asp-items="ViewBag.TimeZoneId" asp-for="TimeZone"></select>
+    </div>
+    <div>
+        <input type="submit" value="Регистрация" style="margin: 5px 0 0 0"/>
     </div>
 </form>

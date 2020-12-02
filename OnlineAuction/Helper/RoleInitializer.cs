@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OnlineAuction.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace OnlineAuction.Helper
             string adminName = "admin";
             string adminEmail = "d.tsukrov@gmail.com";
             string password = "admin123456789";
+            TimeZoneInfo timeZone = TimeZoneInfo.Local;
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));
@@ -30,6 +32,7 @@ namespace OnlineAuction.Helper
                 {
                     UserName = adminName,
                     Email = adminEmail,
+                    TimeZone = timeZone.ToString(),
                     EmailConfirmed = true
                 };
                 IdentityResult result = await userManager.CreateAsync(admin, password);

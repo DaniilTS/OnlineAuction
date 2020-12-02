@@ -1,19 +1,22 @@
-﻿@model OnlineAuction.ViewModels.CreateLotViewModel
+﻿@using System.Net.Http
+@model OnlineAuction.ViewModels.CreateLotViewModel
 
 @{
     ViewBag.Title = "Добавление лота";
 }
-
 <form asp-action="CreateLot" asp-controller="Home">
     <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input asp-for="UserName" value="@User.Identity.Name" hidden>
+    </div>
     <div class="form-group">
         <label asp-for="Name" class="control-label">Name</label>
         <input type="text" asp-for="Name" class="form-control" autocomplete="off"/>
     </div>
     <div class="form-group">
-            <label asp-for="CategoryId" class="control-label">Категория</label>
+        <label asp-for="CategoryId" class="control-label">Категория</label>
         <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-        </div>
+    </div>
     <div class="form-group">
         <label asp-for="Description" class="control-label">Описание</label>
         <input type="text" asp-for="Description" class="form-control" autocomplete="off"/>
@@ -28,9 +31,9 @@
     </div>
     <div class="form-group">
         <label asp-for="FinishDate" class="control-label">Дата конца торгов</label>
-        <input asp-for="FinishDate" type="datetime-local" >
+        <input asp-for="FinishDate" type="datetime-local">
     </div>
     <div class="form-group">
-        <input type="submit" value="Добавить" class="btn btn-outline-secondary" />
+        <input type="submit" value="Добавить" class="btn btn-outline-secondary"/>
     </div>
 </form>

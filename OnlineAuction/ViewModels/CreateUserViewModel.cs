@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineAuction.ViewModels
 {
@@ -11,7 +12,9 @@ namespace OnlineAuction.ViewModels
         [Required]
         public string Password { get; set; }
         
+        public TimeZoneInfo TimeZone { get; set; }
         public string UserId { get; set; }
+        [Required]
         public int Year { get; set; }
     }
 }

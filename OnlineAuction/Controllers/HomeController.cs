@@ -70,8 +70,8 @@ namespace OnlineAuction.Controllers
                 && (model.PublicationDate > DateTime.Now)
                 && (model.FinishDate > DateTime.Now))
             {
-                DateTimeOffset publicationDate = model.PublicationDate.ToUniversalTime();
-                DateTimeOffset finishDate = model.FinishDate.ToUniversalTime();
+                var user = await _userManager.FindByNameAsync(model.UserName);
+                int hours = -1*int.Parse(user.TimeZone.Substring(4, 3));
                 Lot lot = new Lot
                 {
                     Name = model.Name,
@@ -79,16 +79,16 @@ namespace OnlineAuction.Controllers
                     Category = await _context.Categories.FindAsync(model.CategoryId),
                     Description = model.Description,
                     StartCurrency = model.StartCurrency,
-                    PublicationDate = publicationDate.DateTime,
-                    FinishDate = finishDate.DateTime,
-                    User = await _userManager.GetUserAsync(HttpContext.User),
+                    User = user,
+                    PublicationDate = model.PublicationDate.AddHours(hours),
+                    FinishDate = model.FinishDate.AddHours(hours),
                     IsEmailSended = false
                 };
 
                 await _context.Lots.AddAsync(lot);
                 await _context.SaveChangesAsync();
 
-                long diff = (lot.FinishDate - DateTime.UtcNow).Minutes + 1;
+                long diff = (model.FinishDate - DateTime.UtcNow).Minutes + 1;
                 BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id), 
                     TimeSpan.FromMinutes(diff));
                 return RedirectToAction("Index");

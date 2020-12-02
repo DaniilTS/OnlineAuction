@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineAuction.ViewModels;
 using OnlineAuction.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MimeKit;
 using OnlineAuction.Services;
 using OnlineAuction.Services.Interfaces;
@@ -30,6 +32,7 @@ namespace OnlineAuction.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            ViewData["TimeZoneId"] = new SelectList(TimeZoneInfo.GetSystemTimeZones());
             return View();
         }
         
@@ -42,6 +45,7 @@ namespace OnlineAuction.Controllers
                 {
                     Email = model.Email,
                     UserName = model.UserName,
+                    TimeZone = model.TimeZone,
                     Year = model.Year
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);

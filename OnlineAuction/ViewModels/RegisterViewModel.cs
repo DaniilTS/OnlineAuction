@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineAuction.ViewModels
@@ -16,6 +17,9 @@ namespace OnlineAuction.ViewModels
         [Required]
         [Display(Name = "Имя")] 
         public string UserName { get; set; }
+        
+        [Display(Name = "Часовой пояс")] 
+        public string TimeZone { get; set; }
         
         [Required]
         [DataType(DataType.Password)]
