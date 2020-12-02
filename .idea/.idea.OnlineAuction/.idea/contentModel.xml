@@ -25,15 +25,7 @@
         </e>
         <e p="libman.json" t="Include" />
         <e p="Logs" t="Include">
-          <e p="cp_20201030.log" t="Include" />
-          <e p="cp_20201101.log" t="Include" />
-          <e p="cp_20201101_001.log" t="Include" />
-          <e p="cp_20201101_002.log" t="Include" />
-          <e p="cp_20201121.log" t="Include" />
           <e p="cp_20201202.log" t="Include" />
-          <e p="ex_20201030.log" t="Include" />
-          <e p="ex_20201101.log" t="Include" />
-          <e p="ex_20201121.log" t="Include" />
           <e p="ex_20201202.log" t="Include" />
         </e>
         <e p="Migrations" t="Include">
@@ -42,6 +34,7 @@
           <e p="20201101110922_BackgroundEmailSending.cs" t="Include" />
           <e p="20201101110922_BackgroundEmailSending.Designer.cs" t="Include" />
           <e p="ApplicationContextModelSnapshot.cs" t="Include" />
+          <e p="Migrations - Ярлык.lnk" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="Category.cs" t="Include" />
@@ -72,6 +65,7 @@
             <e p="OnlineAuctionByDaniilTS - Web Deploy" t="Include">
               <e p="mssql1.arm.json" t="Include" />
               <e p="profile.arm.json" t="Include" />
+              <e p="secrets1.arm.json" t="Include" />
             </e>
           </e>
           <e p="serviceDependencies.json" t="Include" />

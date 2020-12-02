@@ -6,6 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+      <PackageReference Include="Azure.Identity" Version="1.1.1" />
       <PackageReference Include="Hangfire" Version="1.7.17" />
       <PackageReference Include="Hangfire.AspNetCore" Version="1.7.17" />
       <PackageReference Include="Hangfire.Core" Version="1.7.17" />

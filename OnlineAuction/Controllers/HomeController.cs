@@ -87,7 +87,8 @@ namespace OnlineAuction.Controllers
                 await _context.SaveChangesAsync();
 
                 long diff = (lot.FinishDate - DateTime.UtcNow).Minutes + 1;
-                BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id), TimeSpan.FromMinutes(diff));
+                BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id), 
+                    TimeSpan.FromMinutes(diff));
                 return RedirectToAction("Index");
             }
 

@@ -913,3 +913,8 @@ C:\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\staticwebassets\On
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\OnlineAuction.dll
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\OnlineAuction.pdb
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Debug\netcoreapp3.1\OnlineAuction.genruntimeconfig.cache
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\OnlineAuctionByDaniilTS - Web Deploy\secrets1.arm.json
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Azure.Core.dll
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Azure.Identity.dll
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Debug\netcoreapp3.1\Azure.Security.KeyVault.Secrets.dll

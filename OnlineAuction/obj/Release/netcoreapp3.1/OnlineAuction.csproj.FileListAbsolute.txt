@@ -871,9 +871,6 @@ C:\GitHub\OnlineAuction\OnlineAuction\bin\Release\netcoreapp3.1\runtimes\win\lib
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.csprojAssemblyReference.cache
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.AssemblyInfoInputs.cache
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.AssemblyInfo.cs
-C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.csproj.CoreCompileInputs.cache
-C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.MvcApplicationPartsAssemblyInfo.cs
-C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.MvcApplicationPartsAssemblyInfo.cache
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.RazorAssemblyInfo.cache
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.RazorAssemblyInfo.cs
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.TagHelpers.input.cache
@@ -913,3 +910,11 @@ C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\staticwebassets\
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.dll
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.pdb
 C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.genruntimeconfig.cache
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Release\netcoreapp3.1\Azure.Core.dll
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Release\netcoreapp3.1\Azure.Identity.dll
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Release\netcoreapp3.1\Properties\ServiceDependencies\OnlineAuctionByDaniilTS - Web Deploy\secrets1.arm.json
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Release\netcoreapp3.1\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
+C:\GitHub\OnlineAuction\OnlineAuction\bin\Release\netcoreapp3.1\Azure.Security.KeyVault.Secrets.dll
+C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.csproj.CoreCompileInputs.cache
+C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.MvcApplicationPartsAssemblyInfo.cs
+C:\GitHub\OnlineAuction\OnlineAuction\obj\Release\netcoreapp3.1\OnlineAuction.MvcApplicationPartsAssemblyInfo.cache

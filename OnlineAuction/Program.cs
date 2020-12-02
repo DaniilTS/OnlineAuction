@@ -15,6 +15,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Extensions;
 using Serilog.AspNetCore;
+using Azure.Identity;
 
 namespace OnlineAuction
 {
@@ -45,6 +46,13 @@ namespace OnlineAuction
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+.ConfigureAppConfiguration((context, config) =>
+{
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+config.AddAzureKeyVault(
+keyVaultEndpoint,
+new DefaultAzureCredential());
+})
                 .UseSerilog((hostingContext, loggerConfig) =>
                 {
                     loggerConfig.ReadFrom.Configuration(hostingContext.Configuration);
