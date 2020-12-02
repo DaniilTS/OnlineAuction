@@ -70,6 +70,8 @@ namespace OnlineAuction.Controllers
                 && (model.PublicationDate > DateTime.Now)
                 && (model.FinishDate > DateTime.Now))
             {
+                DateTimeOffset publicationDate = model.PublicationDate.ToUniversalTime();
+                DateTimeOffset finishDate = model.FinishDate.ToUniversalTime();
                 Lot lot = new Lot
                 {
                     Name = model.Name,
@@ -77,8 +79,8 @@ namespace OnlineAuction.Controllers
                     Category = await _context.Categories.FindAsync(model.CategoryId),
                     Description = model.Description,
                     StartCurrency = model.StartCurrency,
-                    PublicationDate = model.PublicationDate.ToUniversalTime(),
-                    FinishDate = model.FinishDate.ToUniversalTime(),
+                    PublicationDate = publicationDate.DateTime,
+                    FinishDate = finishDate.DateTime,
                     User = await _userManager.GetUserAsync(HttpContext.User),
                     IsEmailSended = false
                 };

@@ -21,13 +21,13 @@ namespace OnlineAuction
 {
     public class Program
     {
-         public static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                try 
+                try
                 {
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
@@ -46,13 +46,13 @@ namespace OnlineAuction
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-.ConfigureAppConfiguration((context, config) =>
-{
-var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
-config.AddAzureKeyVault(
-keyVaultEndpoint,
-new DefaultAzureCredential());
-})
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri")!);
+                    config.AddAzureKeyVault(
+                        keyVaultEndpoint,
+                        new DefaultAzureCredential());
+                })
                 .UseSerilog((hostingContext, loggerConfig) =>
                 {
                     loggerConfig.ReadFrom.Configuration(hostingContext.Configuration);
