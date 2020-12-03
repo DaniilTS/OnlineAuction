@@ -20,6 +20,10 @@
         <input type="number" asp-for="Year" class="form-control" />
     </div>
     <div class="form-group">
+        <label asp-for="TimeZone"></label><br/>
+        <select asp-items="ViewBag.TimeZoneId" asp-for="TimeZone"></select>
+    </div>
+    <div class="form-group">
         <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
     </div>
 </form>

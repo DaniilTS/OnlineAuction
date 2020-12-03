@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
@@ -71,8 +72,8 @@ namespace OnlineAuction.Controllers
                 && (model.FinishDate > DateTime.Now))
             {
                 var user = await _userManager.FindByNameAsync(model.UserName);
-                int hours = -1*int.Parse(user.TimeZone.Substring(4, 3));
-                Lot lot = new Lot
+                var hours = -1*int.Parse(user.TimeZone);
+                var lot = new Lot
                 {
                     Name = model.Name,
                     CategoryId = model.CategoryId,
@@ -159,7 +160,7 @@ namespace OnlineAuction.Controllers
             return RedirectToAction("Details", new {id = id});
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -178,10 +179,22 @@ namespace OnlineAuction.Controllers
                 return NotFound();
             }
 
-            LotViewModel model = new LotViewModel
+            LotViewModel model;
+            if (User.Identity.IsAuthenticated)
             {
-                Lot = lot
-            };
+                 model = new LotViewModel
+                {
+                    Lot = lot,
+                    CurrentUser = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name)
+                };
+            }
+            else
+            {
+                model = new LotViewModel
+                {
+                    Lot = lot,
+                };
+            }
 
             return View(model);
         }

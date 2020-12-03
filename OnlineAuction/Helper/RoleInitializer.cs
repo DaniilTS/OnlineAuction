@@ -32,7 +32,7 @@ namespace OnlineAuction.Helper
                 {
                     UserName = adminName,
                     Email = adminEmail,
-                    TimeZone = timeZone.ToString(),
+                    TimeZone = timeZone.ToString().Substring(4, 3),
                     EmailConfirmed = true
                 };
                 IdentityResult result = await userManager.CreateAsync(admin, password);

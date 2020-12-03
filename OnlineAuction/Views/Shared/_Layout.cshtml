@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.RazorPages
+@using Microsoft.AspNetCore.Http
+@using Org.BouncyCastle.Asn1.Ocsp
+@using Request = Azure.Core.Request
+@using System.Security.Principal
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -72,10 +77,14 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="border-top footer">
+        <div  style="float: left; margin: 0 0 0 50px">
             &copy; 2020 - OnlineAuction - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div style="margin: 0 0 0 600px; position: absolute; font-weight: bold" >* - При регистрации вы сможете принимать участие в торгах, а так же время будет отображаться корректно(не UTC)</div>
+        }
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

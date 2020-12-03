@@ -45,7 +45,7 @@ namespace OnlineAuction.Controllers
                 {
                     Email = model.Email,
                     UserName = model.UserName,
-                    TimeZone = model.TimeZone,
+                    TimeZone = model.TimeZone.Substring(4, 3),
                     Year = model.Year
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);

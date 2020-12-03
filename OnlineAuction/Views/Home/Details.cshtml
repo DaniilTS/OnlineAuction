@@ -7,7 +7,7 @@
 {
     <h3>Торги завершены</h3>
 }
-else if(DateTime.UtcNow < Model.Lot.PublicationDate)
+else if (DateTime.UtcNow < Model.Lot.PublicationDate)
 {
     <h3>Торги ещё не начались</h3>
 }
@@ -21,9 +21,34 @@ else
 <p>Описание: @Model.Lot.Description</p>
 <p>Текущая цена: @Model.Lot.StartCurrency руб.</p>
 <p>Категория товара: @Model.Lot.Category.Name</p>
-<p>Начало торгов: <span id="PublicationDate">@Model.Lot.PublicationDate.AddHours(int.Parse(Model.Lot.User.TimeZone.Substring(4, 3)))</span></p>
-<p>конец торгов: <span id="FinishDate">@Model.Lot.FinishDate.AddHours(int.Parse(Model.Lot.User.TimeZone.Substring(4, 3)))</span></p>
-<p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Начало торгов: <span id="PublicationDate">@Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))</span></p>
+    <p>Конец торгов: <span id="FinishDate">@Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))</span></p>
+}
+else
+{
+    <p>
+        Начало торгов (По UTC*): <span id="PublicationDate">@Model.Lot.PublicationDate</span>
+    </p>
+    <p>конец торгов (По UTC*): <span id="FinishDate">@Model.Lot.FinishDate</span></p>
+}
+@if (DateTime.UtcNow > Model.Lot.FinishDate && string.IsNullOrEmpty(Model.Lot.WiningUserName))
+{
+    <p>Итог торгов: Никто так и не поставил ставку</p>
+}
+else if (DateTime.UtcNow > Model.Lot.FinishDate && !string.IsNullOrEmpty(Model.Lot.WiningUserName))
+{
+    <p>Итог торгов: победитель - @Model.Lot.WiningUserName</p>
+}
+else if (DateTime.UtcNow < Model.Lot.PublicationDate)
+{
+    <p>Торги ещё не начались, ожидайте</p>
+}
+else
+{
+    <p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
+}
 
 <form asp-action="DeleteLot" asp-route-id="@Model.Lot.Id" method="post">
     <div class="form-group">
@@ -31,23 +56,27 @@ else
         {
             <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Lot.Id">Изменить</a>
         }
-        @if (DateTime.UtcNow < Model.Lot.FinishDate && 
+        @if (DateTime.UtcNow < Model.Lot.FinishDate &&
              DateTime.UtcNow > Model.Lot.PublicationDate)
         {
-            @if (User.Identity.Name == Model.Lot.WiningUserName||
+            @if (User.Identity.Name == Model.Lot.WiningUserName ||
                  User.Identity.Name == Model.Lot.User.UserName)
             {
                 <a class="Disabled btn btn-sm btn-primary"
                    asp-action="RaisePrice"
                    asp-route-id="@Model.Lot.Id"
-                   asp-route-username="@User.Identity.Name">Поднять цену</a>
+                   asp-route-username="@User.Identity.Name">
+                    Поднять цену
+                </a>
             }
             else
             {
                 <a class="btn btn-sm btn-primary"
                    asp-action="RaisePrice"
                    asp-route-id="@Model.Lot.Id"
-                   asp-route-username="@User.Identity.Name">Поднять цену</a>
+                   asp-route-username="@User.Identity.Name">
+                    Поднять цену
+                </a>
             }
         }
         @if (User.Identity.Name == Model.Lot.User.UserName || User.IsInRole("admin"))
@@ -72,13 +101,15 @@ else
 {
     <div class="form-group row" style="margin: 0 0 0 5px">
         <p style="margin: 0 5px 0 0">@comment.User.UserName: @comment.Text</p>
-        @if (User.IsInRole("admin")||User.Identity.Name==comment.User.UserName)
+        @if (User.IsInRole("admin") || User.Identity.Name == comment.User.UserName)
         {
             <form method="post">
                 <button class="btn btn-sm btn-danger"
                         asp-action="DeleteComment"
                         asp-route-commentid="@comment.Id"
-                        asp-route-lotid="@Model.Lot.Id">Удалить</button>
+                        asp-route-lotid="@Model.Lot.Id">
+                    Удалить
+                </button>
             </form>
         }
         <hr>

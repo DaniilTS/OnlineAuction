@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineAuction.Data;
 using OnlineAuction.Models;
@@ -92,8 +93,10 @@ namespace OnlineAuction.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
+                TimeZone = user.TimeZone,
                 Year = user.Year
             };
+            ViewData["TimeZoneId"] = new SelectList(TimeZoneInfo.GetSystemTimeZones());
             return View(model);
         }
 
@@ -107,6 +110,7 @@ namespace OnlineAuction.Controllers
                 {
                     user.Email = model.Email;
                     user.UserName = model.UserName;
+                    user.TimeZone = model.TimeZone.Substring(4, 3);
                     user.Year = model.Year;
 
                     var result = await _userManager.UpdateAsync(user);
@@ -125,7 +129,7 @@ namespace OnlineAuction.Controllers
             User user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                IdentityResult result = await _userManager.DeleteAsync(user);
+                await _userManager.DeleteAsync(user);
             }
 
             return RedirectToAction("Users");
