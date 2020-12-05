@@ -56,9 +56,11 @@ namespace OnlineAuction.Controllers
         }
 
         [Authorize]
-        public IActionResult CreateLot()
+        public async Task<IActionResult> CreateLot()
         {
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name");
+            var user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            ViewData["CurrentUserTime"] = DateTime.UtcNow.AddHours(int.Parse(user.TimeZone));
             return View();
         }
 
@@ -66,13 +68,14 @@ namespace OnlineAuction.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateLot(CreateLotViewModel model)
         {
+            var user = await _userManager.FindByNameAsync(model.UserName);
+            var hours = int.Parse(user.TimeZone);
+            
             if (ModelState.IsValid
-                && (model.FinishDate > model.PublicationDate)
-                && (model.PublicationDate > DateTime.Now)
-                && (model.FinishDate > DateTime.Now))
+                && model.FinishDate > model.PublicationDate
+                && model.PublicationDate > DateTime.UtcNow.AddHours(hours)
+                && model.FinishDate > DateTime.UtcNow.AddHours(hours))
             {
-                var user = await _userManager.FindByNameAsync(model.UserName);
-                var hours = -1*int.Parse(user.TimeZone);
                 var lot = new Lot
                 {
                     Name = model.Name,
@@ -81,8 +84,8 @@ namespace OnlineAuction.Controllers
                     Description = model.Description,
                     StartCurrency = model.StartCurrency,
                     User = user,
-                    PublicationDate = model.PublicationDate.AddHours(hours),
-                    FinishDate = model.FinishDate.AddHours(hours),
+                    PublicationDate = model.PublicationDate.AddHours(-1*hours),
+                    FinishDate = model.FinishDate.AddHours(-1*hours),
                     IsEmailSended = false
                 };
 
@@ -90,14 +93,13 @@ namespace OnlineAuction.Controllers
                 await _context.SaveChangesAsync();
 
                 long diff = (model.FinishDate - DateTime.UtcNow).Minutes + 1;
-                BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id), 
+                BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id),
                     TimeSpan.FromMinutes(diff));
-                
+
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("odd user", "Дата конца должна быть больше даты начала");
-            return View(model);
+            return RedirectToAction("CreateLot");
         }
 
         [Authorize]
@@ -183,7 +185,7 @@ namespace OnlineAuction.Controllers
             LotViewModel model;
             if (User.Identity.IsAuthenticated)
             {
-                 model = new LotViewModel
+                model = new LotViewModel
                 {
                     Lot = lot,
                     CurrentUser = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name)

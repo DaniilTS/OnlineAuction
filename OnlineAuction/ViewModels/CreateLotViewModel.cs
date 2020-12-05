@@ -25,7 +25,6 @@ namespace OnlineAuction.ViewModels
         [Required]
         [DataType(DataType.DateTime)] 
         public DateTime FinishDate { get; set; }
-
         public string UserName { get; set; }
     }
 }

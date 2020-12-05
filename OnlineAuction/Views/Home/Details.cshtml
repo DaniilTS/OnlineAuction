@@ -3,24 +3,48 @@
 @{
     ViewBag.Title = "Информация о лоте";
 }
-@if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
+@if (User.Identity.IsAuthenticated)
 {
-    <h3>Торги завершены</h3>
-}
-else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) < Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
-{
-    <h3>Торги ещё не начались</h3>
+    @if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+         > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
+    {
+        <h3>Торги завершены</h3>
+    }
+    else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+             < Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
+    {
+        <h3>Торги ещё не начались</h3>
+    }
+    else
+    {
+        <h3>Торги идут</h3>
+    }
 }
 else
 {
-    <h3>Торги идут</h3>
+    @if (DateTime.UtcNow > Model.Lot.FinishDate)
+    {
+        <h3>Торги завершены</h3>
+    }
+    else if (DateTime.UtcNow < Model.Lot.PublicationDate)
+    {
+        <h3>Торги ещё не начались</h3>
+    }
+    else
+    {
+        <h3>Торги идут</h3>
+    }
+
 }
 
 <p>UTC NOW :@DateTime.UtcNow</p>
 <p>PUBL DATE UTC :@Model.Lot.PublicationDate</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>ADD HOURS TO UTC: @DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
+    <p>ADD HOURS TO PUBL DATE: @Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
+}
 
-<p>ADD HOURS TO UTC: @DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
-<p>ADD HOURS TO PUBL DATE: @Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
 
 
 <p>Создатель лота: @Model.Lot.User.UserName</p>
@@ -40,27 +64,51 @@ else
     </p>
     <p>конец торгов (По UTC*): <span id="FinishDate">@Model.Lot.FinishDate</span></p>
 }
-@if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
-     > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))
-     && string.IsNullOrEmpty(Model.Lot.WiningUserName))
+
+@if (User.Identity.IsAuthenticated)
 {
-    <p>Итог торгов: Никто так и не поставил ставку</p>
-}
-else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone))
-         > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
-         && !string.IsNullOrEmpty(Model.Lot.WiningUserName))
-{
-    <p>Итог торгов: победитель - @Model.Lot.WiningUserName</p>
-}
-else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
-         < Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
-{
-    <p>Торги ещё не начались, ожидайте</p>
+    @if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+         > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))
+         && string.IsNullOrEmpty(Model.Lot.WiningUserName))
+    {
+        <p>Итог торгов: Никто так и не поставил ставку</p>
+    }
+    else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone))
+             > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+             && !string.IsNullOrEmpty(Model.Lot.WiningUserName))
+    {
+        <p>Итог торгов: победитель - @Model.Lot.WiningUserName</p>
+    }
+    else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+             < Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
+    {
+        <p>Торги ещё не начались, ожидайте</p>
+    }
+    else
+    {
+        <p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
+    }
 }
 else
 {
-    <p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
+    @if (DateTime.UtcNow > Model.Lot.FinishDate && string.IsNullOrEmpty(Model.Lot.WiningUserName))
+    {
+        <p>Итог торгов: Никто так и не поставил ставку</p>
+    }
+    else if (DateTime.UtcNow > Model.Lot.FinishDate && !string.IsNullOrEmpty(Model.Lot.WiningUserName))
+    {
+        <p>Итог торгов: победитель - @Model.Lot.WiningUserName</p>
+    }
+    else if (DateTime.UtcNow < Model.Lot.PublicationDate)
+    {
+        <p>Торги ещё не начались, ожидайте</p>
+    }
+    else
+    {
+        <p>Победитель на данный момент: @Model.Lot.WiningUserName</p>
+    }
 }
+
 
 <form asp-action="DeleteLot" asp-route-id="@Model.Lot.Id" method="post">
     <div class="form-group">
@@ -68,29 +116,36 @@ else
         {
             <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Lot.Id">Изменить</a>
         }
-        @if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) < Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)) &&
-             DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) > Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
+        
+        @if (User.Identity.IsAuthenticated)
         {
-            @if (User.Identity.Name == Model.Lot.WiningUserName ||
-                 User.Identity.Name == Model.Lot.User.UserName)
+            @if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+                 < Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)) &&
+                 DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+                 > Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
             {
-                <a class="Disabled btn btn-sm btn-primary"
-                   asp-action="RaisePrice"
-                   asp-route-id="@Model.Lot.Id"
-                   asp-route-username="@User.Identity.Name">
-                    Поднять цену
-                </a>
-            }
-            else
-            {
-                <a class="btn btn-sm btn-primary"
-                   asp-action="RaisePrice"
-                   asp-route-id="@Model.Lot.Id"
-                   asp-route-username="@User.Identity.Name">
-                    Поднять цену
-                </a>
+                @if (User.Identity.Name == Model.Lot.WiningUserName ||
+                     User.Identity.Name == Model.Lot.User.UserName)
+                {
+                    <a class="Disabled btn btn-sm btn-primary"
+                       asp-action="RaisePrice"
+                       asp-route-id="@Model.Lot.Id"
+                       asp-route-username="@User.Identity.Name">
+                        Поднять цену
+                    </a>
+                }
+                else
+                {
+                    <a class="btn btn-sm btn-primary"
+                       asp-action="RaisePrice"
+                       asp-route-id="@Model.Lot.Id"
+                       asp-route-username="@User.Identity.Name">
+                        Поднять цену
+                    </a>
+                }
             }
         }
+        
         @if (User.Identity.Name == Model.Lot.User.UserName || User.IsInRole("admin"))
         {
             <button type="submit" class="btn btn-sm btn-danger">
