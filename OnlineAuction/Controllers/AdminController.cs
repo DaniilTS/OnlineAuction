@@ -31,11 +31,13 @@ namespace OnlineAuction.Controllers
         }
         
         [HttpGet]
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public async Task<IActionResult> Users(string searchString)
         {
             var users = from u in _userManager.Users
@@ -49,9 +51,11 @@ namespace OnlineAuction.Controllers
             return View(await users.ToListAsync());
         }
 
+        [Authorize]
         public IActionResult CreateUser() => View();
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateUser(CreateUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -80,6 +84,7 @@ namespace OnlineAuction.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> EditUser(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
@@ -101,6 +106,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -124,6 +130,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
@@ -136,6 +143,7 @@ namespace OnlineAuction.Controllers
         }
         
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> ConfirmEmail(string userId)
         {
             if (userId == null)
@@ -157,6 +165,7 @@ namespace OnlineAuction.Controllers
                 return View("Error");
         }
 
+        [Authorize]
         public async Task<IActionResult> ChangeUserPassword(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
@@ -174,6 +183,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> ChangeUserPassword(ChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -203,11 +213,14 @@ namespace OnlineAuction.Controllers
             return View(model);
         }
 
+        [Authorize]
         public IActionResult Roles() => View(_roleManager.Roles.ToList());
 
+        [Authorize]
         public IActionResult CreateRole() => View();
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateRole(string name)
         {
             if (!string.IsNullOrEmpty(name))
@@ -228,6 +241,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteRole(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -239,6 +253,7 @@ namespace OnlineAuction.Controllers
             return RedirectToAction("Roles");
         }
 
+        [Authorize]
         public async Task<IActionResult> EditRole(string userId)
         {
             User user = await _userManager.FindByIdAsync(userId);
@@ -261,6 +276,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditRole(string userId, List<string> roles)
         {
             User user = await _userManager.FindByIdAsync(userId);
@@ -280,14 +296,17 @@ namespace OnlineAuction.Controllers
             return NotFound();
         }
 
+        [Authorize]
         public async Task<IActionResult> Categories()
         {
             return View(await _context.Categories.ToListAsync());
         }
 
+        [Authorize]
         public IActionResult CreateCategory() => View();
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateCategory(CreateCategoryViewModel model)
         {
             if (ModelState.IsValid)
@@ -306,6 +325,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -315,6 +335,7 @@ namespace OnlineAuction.Controllers
             return RedirectToAction("Categories");
         }
 
+        [Authorize]
         public async Task<IActionResult> UpdateCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -332,6 +353,7 @@ namespace OnlineAuction.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateCategory(EditCategoryViewModel model)
         {
             if (ModelState.IsValid)
