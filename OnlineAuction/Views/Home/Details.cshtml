@@ -40,15 +40,20 @@ else
     </p>
     <p>конец торгов (По UTC*): <span id="FinishDate">@Model.Lot.FinishDate</span></p>
 }
-@if (DateTime.UtcNow > Model.Lot.FinishDate && string.IsNullOrEmpty(Model.Lot.WiningUserName))
+@if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+     > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))
+     && string.IsNullOrEmpty(Model.Lot.WiningUserName))
 {
     <p>Итог торгов: Никто так и не поставил ставку</p>
 }
-else if (DateTime.UtcNow > Model.Lot.FinishDate && !string.IsNullOrEmpty(Model.Lot.WiningUserName))
+else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone))
+         > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+         && !string.IsNullOrEmpty(Model.Lot.WiningUserName))
 {
     <p>Итог торгов: победитель - @Model.Lot.WiningUserName</p>
 }
-else if (DateTime.UtcNow < Model.Lot.PublicationDate)
+else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) 
+         < Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
 {
     <p>Торги ещё не начались, ожидайте</p>
 }
@@ -63,8 +68,8 @@ else
         {
             <a class="btn btn-sm btn-primary" asp-action="EditLot" asp-route-id="@Model.Lot.Id">Изменить</a>
         }
-        @if (DateTime.UtcNow < Model.Lot.FinishDate &&
-             DateTime.UtcNow > Model.Lot.PublicationDate)
+        @if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) < Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)) &&
+             DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) > Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
         {
             @if (User.Identity.Name == Model.Lot.WiningUserName ||
                  User.Identity.Name == Model.Lot.User.UserName)
