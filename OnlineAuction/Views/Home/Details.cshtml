@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "Информация о лоте";
 }
-@if (DateTime.UtcNow > Model.Lot.FinishDate)
+@if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) > Model.Lot.FinishDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
 {
     <h3>Торги завершены</h3>
 }
-else if (DateTime.UtcNow < Model.Lot.PublicationDate)
+else if (DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone)) < Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone)))
 {
     <h3>Торги ещё не начались</h3>
 }
@@ -15,6 +15,13 @@ else
 {
     <h3>Торги идут</h3>
 }
+
+<p>UTC NOW :@DateTime.UtcNow</p>
+<p>PUBL DATE UTC :@Model.Lot.PublicationDate</p>
+
+<p>ADD HOURS TO UTC: @DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
+<p>ADD HOURS TO PUBL DATE: @Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
+
 
 <p>Создатель лота: @Model.Lot.User.UserName</p>
 <p>Название: @Model.Lot.Name</p>

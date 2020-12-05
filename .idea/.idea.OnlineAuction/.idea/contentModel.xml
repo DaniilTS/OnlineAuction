@@ -27,8 +27,10 @@
         <e p="Logs" t="Include">
           <e p="cp_20201202.log" t="Include" />
           <e p="cp_20201203.log" t="Include" />
+          <e p="cp_20201205.log" t="Include" />
           <e p="ex_20201202.log" t="Include" />
           <e p="ex_20201203.log" t="Include" />
+          <e p="ex_20201205.log" t="Include" />
         </e>
         <e p="Migrations" t="Include">
           <e p="20201024085903_initial.cs" t="Include" />

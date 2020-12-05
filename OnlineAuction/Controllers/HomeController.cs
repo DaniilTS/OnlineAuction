@@ -92,6 +92,7 @@ namespace OnlineAuction.Controllers
                 long diff = (model.FinishDate - DateTime.UtcNow).Minutes + 1;
                 BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id), 
                     TimeSpan.FromMinutes(diff));
+                
                 return RedirectToAction("Index");
             }
 
