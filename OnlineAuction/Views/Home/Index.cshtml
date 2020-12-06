@@ -17,9 +17,12 @@
             <td>
                 <form asp-action="DeleteLot" asp-route-id="@lot.Id" method="post">
                     <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@lot.Id">Просмотреть лот</a>
-                    <button type="submit" class="btn btn-sm btn-danger">
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                    {
+                        <button type="submit" class="btn btn-sm btn-danger">
                             Удалить
                         </button>
+                    }
                 </form>
             </td>
         </tr>
