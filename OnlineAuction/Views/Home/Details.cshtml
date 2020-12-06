@@ -37,13 +37,13 @@ else
 
 }
 
-<p>UTC NOW :@DateTime.UtcNow</p>
+@*<p>UTC NOW :@DateTime.UtcNow</p>
 <p>PUBL DATE UTC :@Model.Lot.PublicationDate</p>
 @if (User.Identity.IsAuthenticated)
 {
     <p>ADD HOURS TO UTC: @DateTime.UtcNow.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
     <p>ADD HOURS TO PUBL DATE: @Model.Lot.PublicationDate.AddHours(int.Parse(Model.CurrentUser.TimeZone))</p>
-}
+}*@
 
 
 
@@ -146,7 +146,7 @@ else
             }
         }
         
-        @if (User.Identity.Name == Model.Lot.User.UserName || User.IsInRole("admin"))
+        @if (User.Identity.IsAuthenticated && (User.Identity.Name == Model.Lot.User.UserName || User.IsInRole("admin")))
         {
             <button type="submit" class="btn btn-sm btn-danger">
                 Удалить

@@ -70,7 +70,7 @@ namespace OnlineAuction.Controllers
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
             var hours = int.Parse(user.TimeZone);
-            
+
             if (ModelState.IsValid
                 && model.FinishDate > model.PublicationDate
                 && model.PublicationDate > DateTime.UtcNow.AddHours(hours)
@@ -88,11 +88,11 @@ namespace OnlineAuction.Controllers
                     FinishDate = model.FinishDate.AddHours(-1*hours),
                     IsEmailSended = false
                 };
-
+                
                 await _context.Lots.AddAsync(lot);
                 await _context.SaveChangesAsync();
-
-                long diff = (model.FinishDate - DateTime.UtcNow).Minutes + 1;
+                
+                double diff = (model.FinishDate - DateTime.UtcNow.AddHours(hours)).TotalMinutes + 1;
                 BackgroundJob.Schedule<BackgroundEndLotCheking>(x => x.ChekLot(lot.Id),
                     TimeSpan.FromMinutes(diff));
 
